@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8009c2c2-0d4c-418e-9861-48d096aa5fc3" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Rezeptdatenbank.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rezeptdatenbank.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Rezeptdatenbank.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rezeptdatenbank.py" afterDir="false" />
     </list>
     <ignored path="Rezeptdatenbank.iws" />
@@ -26,10 +26,12 @@
       <file leaf-file-name="Rezeptdatenbank.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Rezeptdatenbank.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="48" column="32" selection-start-line="48" selection-start-column="32" selection-end-line="48" selection-end-column="32" />
+            <state relative-caret-position="274">
+              <caret line="387" column="44" lean-forward="true" selection-start-line="387" selection-start-column="44" selection-end-line="387" selection-end-column="44" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
+                <element signature="e#4400#4607#0" />
+                <element signature="e#11166#13871#0" />
               </folding>
             </state>
           </provider>
@@ -50,8 +52,9 @@
       <find>tk.tk</find>
       <find>stringvar</find>
       <find>svnew</find>
-      <find>sv</find>
       <find>check_re</find>
+      <find>sv</find>
+      <find>isflo</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -386,7 +389,14 @@
       <option name="project" value="LOCAL" />
       <updated>1524081660728</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="changed StringVar() to NewRecipe">
+      <created>1524082317449</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1524082317449</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -451,7 +461,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="commit 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit 2" />
+    <MESSAGE value="changed StringVar() to NewRecipe" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed StringVar() to NewRecipe" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -559,10 +570,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Rezeptdatenbank.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="48" column="32" selection-start-line="48" selection-start-column="32" selection-end-line="48" selection-end-column="32" />
+        <state relative-caret-position="274">
+          <caret line="387" column="44" lean-forward="true" selection-start-line="387" selection-start-column="44" selection-end-line="387" selection-end-column="44" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
+            <element signature="e#4400#4607#0" />
+            <element signature="e#11166#13871#0" />
           </folding>
         </state>
       </provider>

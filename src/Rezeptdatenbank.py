@@ -25,6 +25,14 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS ingredients (
                ingredient TEXT COLLATE NOCASE)""")
 connection.commit()
 
+
+def isfloat(value):
+    try:
+        float(value)
+        return True
+    except ValueError:
+        return False
+
 def readData():
     # read all data from database
     for row in cursor.execute('SELECT * FROM ingredients'):
@@ -61,6 +69,7 @@ def check_recipe_name():
 class Recipedb(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
+        '''
 
         # Connect to Database
         self.connection = sqlite3.connect("Rezeptdatenbank.db")
@@ -77,7 +86,7 @@ class Recipedb(tk.Tk):
               unit TEXT,
                ingredient TEXT COLLATE NOCASE)""")
 
-        self.connection.commit()
+        self.connection.commit()'''
 
         # Adjust Title and Icon
         tk.Tk.iconbitmap(self, default="auge_ava_50_Q5O_icon.ico")
@@ -89,7 +98,7 @@ class Recipedb(tk.Tk):
         butt_new.pack(side=tk.LEFT, padx=2, pady=2)
         butt_search = ttk.Button(toolbar, text="Rezept suchen", command=lambda: self.show_frame(SearchRecipe))
         butt_search.pack(side=tk.LEFT, padx=2, pady=2)
-        butt_edit = ttk.Button(toolbar, text="Rezept bearbeiten", command=lambda: self.show_frame(EditRecipe))
+        butt_edit = ttk.Button(toolbar, text="Rezept bearbeiten", command=lambda: self.show_frame(ShowEditRecipe))
         butt_edit.pack(side=tk.LEFT, padx=2, pady=2)
         toolbar.pack(side=tk.TOP, fill=tk.X)
 
@@ -105,7 +114,7 @@ class Recipedb(tk.Tk):
         self.frames = {}
 
         # Load all pages
-        for F in (StartPage, NewRecipe, SearchRecipe, EditRecipe):
+        for F in (StartPage, NewRecipe, SearchRecipe, ShowEditRecipe):
             frame = F(container, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
@@ -120,21 +129,6 @@ class Recipedb(tk.Tk):
         # shows the desired frame
         frame = self.frames[cont]
         frame.tkraise()
-
-    def write_data(self, preparation_list, ingredient_list):
-        # write input to database
-        for i in range(len(ingredient_list[3])):
-            ingredients = []
-            ingredients.append(ingredient_list[0])
-            for a in range(1, 4):
-                ingredients.append(ingredient_list[a][i])
-            self.cursor.execute('INSERT INTO ingredients VALUES (?,?,?,?)', ingredients)
-        self.connection.commit()
-        self.cursor.execute('INSERT INTO recipe VALUES (?,?,?)', preparation_list)
-        self.connection.commit()
-
-
-
 
 
 
@@ -212,12 +206,7 @@ class NewRecipe(tk.Frame):
                              command=lambda: controller.show_frame(SearchRecipe))
         button2.pack()'''
 
-    def isfloat(self, value):
-        try:
-            float(value)
-            return True
-        except ValueError:
-            return False
+
 
     def doublespace(self, text):
         while "  " in text:
@@ -227,11 +216,8 @@ class NewRecipe(tk.Frame):
     def getingredients(self, recipename, duration, preparation, ingredienttext):
         #text = textfeld.get("1.0", "end-1c")
         if not recipename == "":
-            unitlist = ["l", "ml", "g", "kg", "gr", "kl", "cup", "st", "pc"]
-            #index = 0
-            #i = 0
-            #leerzeichen = []
-            #zeilen = []
+            unitlist = ["l", "ml", "g", "kg", "gr", "kl", "cup", "st", "pc", "liter", "gramm", "kilo", "stück", "große",
+                        "kleine", "großes", "kleines"]
             quantities = []
             units = []
             ingredients = []
@@ -255,7 +241,7 @@ class NewRecipe(tk.Frame):
                     # savety to replace decimal , with decimal .
                     quantity = quantity.replace(",", ".")
                     # check if the quantity was given as float
-                    if not self.isfloat(quantity):
+                    if not isfloat(quantity):
                         messagebox.showinfo("Menge falsch", "Menge als Zahl angeben")
 
                 if len(parts) > 2:
@@ -314,7 +300,7 @@ class SearchRecipe(tk.Frame):
 
             # search for recipe name similar to the input
             if not recipe_name == "":
-                for row in controller.cursor.execute('SELECT recipename FROM recipe WHERE recipename LIKE ?', ('%'+recipe_name+'%',)):
+                for row in cursor.execute('SELECT recipename FROM recipe WHERE recipename LIKE ?', ('%'+recipe_name+'%',)):
                     results.append(row)
 
             # divide the ingredients into single items
@@ -326,7 +312,7 @@ class SearchRecipe(tk.Frame):
             print(ingredient_result)
 
             if not ingredients == "":
-                for row in controller.cursor.execute('SELECT recipename FROM ingredients WHERE ingredient=? COLLATE NOCASE', (ingredients,)):
+                for row in cursor.execute('SELECT recipename FROM ingredients WHERE ingredient=? COLLATE NOCASE', (ingredients,)):
                     results.append(row)
             # empty the listbox before adding new items
             lbx_recipelist.delete(0, tk.END)
@@ -361,20 +347,50 @@ class SearchRecipe(tk.Frame):
         but_open.grid(row=4, column=0)
 
 
-class EditRecipe(tk.Frame):
+class ShowEditRecipe(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text="Page Two", font=LARGE_FONT)
-        label.pack(pady=10, padx=10)
+        '''GUI Elemente definieren'''
+        '''Label'''
+        lab_recipe_name = tk.Label(self, text="Rezeptname: ")
+        lab_duration = tk.Label(self, text="Dauer: ")
+        lab_minutes = tk.Label(self, text="min")
+        lab_preparation = tk.Label(self, text="Zubereitung: ")
+        lab_ingredients = tk.Label(self, text="Zutaten: ")
+        '''Entryboxes'''
+        ent_recipe_name = tk.Entry(self, width=40)
+        ent_duration = tk.Entry(self, width=10)
+        txt_ingredients = tk.Text(self, width=40, height=10)
+        txt_ingredients.bind("<Tab>", controller.focus_next_window)
+        txt_preparation = tk.Text(self, width=40, height=10)
+        txt_preparation.bind("<Tab>", controller.focus_next_window)
+        '''Buttons'''
+        but_check = tk.Button(self, text="Prüfen")
+        but_save = tk.Button(self, text="Speichern")
+        but_read = tk.Button(self, text="Text", command=readData)
+        but_clear = tk.Button(self, text="Neues Rezept")
 
-        button1 = ttk.Button(self, text="Back to Home",
-                            command=None)
-        button1.pack()
+        '''GUI Elemente positionieren'''
+        lab_recipe_name.grid(row=0, column=0, sticky=tk.NE)
+        ent_recipe_name.grid(row=0, column=1, columnspan=2, padx=2, pady=2, sticky=tk.W)
+        lab_duration.grid(row=1, column=0, sticky=tk.NE)
+        ent_duration.grid(row=1, column=1, padx=2, pady=2, sticky=tk.NSEW)
+        lab_minutes.grid(row=1, column=2, sticky=tk.NW)
+        lab_ingredients.grid(row=2, column=0, sticky=tk.NE)
+        txt_ingredients.grid(row=2, column=1, columnspan=2, padx=2, pady=2, sticky=tk.NW)
+        lab_preparation.grid(row=3, column=0, sticky=tk.NE)
+        txt_preparation.grid(row=3, column=1, columnspan=2, padx=2, pady=2, sticky=tk.NW)
+        but_check.grid(row=4, column=0)
+        but_save.grid(row=4, column=1)
+        but_read.grid(row=4, column=2)
+        but_clear.grid(row=4, column=3)
+        ent_recipe_name.config(state="readonly")
 
-        button2 = ttk.Button(self, text="Page One",
-                            command=lambda: controller.show_frame(SearchRecipe))
-        button2.pack()
+        ent_recipe_name.config(state="normal")
+        ent_recipe_name.insert(tk.END, "Testname")
+        ent_recipe_name.config(state="readonly")
+
 
 app = Recipedb()
 
