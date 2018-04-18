@@ -44,13 +44,23 @@ def write_data(preparation_list, ingredient_list):
     cursor.execute('INSERT INTO recipe VALUES (?,?,?)', preparation_list)
     connection.commit()
 
+# check if there is already a recipe with the inputed recipe name in the database
+def check_recipe_name():
+    recipe_name = NewRecipe.sv.get()
+    for recipe in cursor.execute('SELECT recipename FROM recipe'):
+        if recipe_name.strip() in recipe:
+            tmp_value = messagebox.askyesno("Rezeptname bereits vergeben.",
+                                            "Rezeptname bereits vergeben. Rezept zum Bearbeiten öffnen?")
+            if tmp_value:
+                print("rezept öffnen")
+            else:
+                print("nicht öffnen")
+    return True
+
 
 class Recipedb(tk.Tk):
-
-    
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
-        self.sv = tk.StringVar()
 
         # Connect to Database
         self.connection = sqlite3.connect("Rezeptdatenbank.db")
@@ -123,18 +133,7 @@ class Recipedb(tk.Tk):
         self.cursor.execute('INSERT INTO recipe VALUES (?,?,?)', preparation_list)
         self.connection.commit()
 
-    # check if there is already a recipe with the inputed recipe name in the database
-    def check_recipe_name(self):
-        recipe_name = self.sv.get()
-        for recipe in self.cursor.execute('SELECT recipename FROM recipe'):
-            if recipe_name.strip() in recipe:
-                tmp_value = messagebox.askyesno("Rezeptname bereits vergeben.",
-                                                "Rezeptname bereits vergeben. Rezept zum Bearbeiten öffnen?")
-                if tmp_value:
-                    print("rezept öffnen")
-                else:
-                    print("nicht öffnen")
-        return True
+
 
 
 
@@ -153,6 +152,7 @@ class NewRecipe(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+        NewRecipe.sv = tk.StringVar()
 
         self.preparation_results = []
         self.ingredient_results = []
@@ -171,7 +171,7 @@ class NewRecipe(tk.Frame):
         lab_preparation = tk.Label(self, text="Zubereitung: ")
         lab_ingredients = tk.Label(self, text="Zutaten: ")
         '''Entryboxes'''
-        ent_recipe_name = tk.Entry(self, width=40, textvariable=controller.sv, validate="focusout", validatecommand=controller.check_recipe_name)
+        ent_recipe_name = tk.Entry(self, width=40, textvariable=NewRecipe.sv, validate="focusout", validatecommand=check_recipe_name)
         ent_duration = tk.Entry(self, width=10)
         txt_ingredients = tk.Text(self, width=40, height=10)
         txt_ingredients.bind("<Tab>", controller.focus_next_window)
