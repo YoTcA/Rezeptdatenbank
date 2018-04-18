@@ -69,7 +69,6 @@ class Recipedb(tk.Tk):
 
         self.connection.commit()
 
-
         # Adjust Title and Icon
         tk.Tk.iconbitmap(self, default="auge_ava_50_Q5O_icon.ico")
         tk.Tk.wm_title(self, "Rezeptdatenbank V 0.1")
@@ -135,6 +134,7 @@ class Recipedb(tk.Tk):
                     print("rezept öffnen")
                 else:
                     print("nicht öffnen")
+        return True
 
 
 
