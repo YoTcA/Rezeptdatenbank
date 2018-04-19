@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8009c2c2-0d4c-418e-9861-48d096aa5fc3" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/database_files.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Rezeptdatenbank.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rezeptdatenbank.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Rezeptdatenbank.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rezeptdatenbank.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auge_ava_50.bmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auge_ava_50.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auge_ava_50.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auge_ava_50.png" beforeDir="false" />
     </list>
     <ignored path="Rezeptdatenbank.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,23 +24,26 @@
     <favorites_list name="Rezeptdatenbank" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
+    <splitter split-orientation="horizontal" split-proportion="0.5765625">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="Rezeptdatenbank.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="Rezeptdatenbank.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/Rezeptdatenbank.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="17">
-                  <caret line="1" column="14" lean-forward="true" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
+                <state relative-caret-position="-2176">
+                  <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+                  <folding>
+                    <element signature="e#0#20#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="database_files.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="database_files.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/database_files.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state>
-                  <caret column="14" selection-start-column="14" selection-end-column="14" />
+                <state relative-caret-position="328">
+                  <caret line="51" selection-start-line="51" selection-end-line="51" />
                 </state>
               </provider>
             </entry>
@@ -49,14 +52,11 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="Rezeptdatenbank.py" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/Rezeptdatenbank.py">
+          <file leaf-file-name="database_files.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/database_files.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="57">
-                  <caret line="148" column="24" lean-forward="true" selection-start-line="148" selection-start-column="24" selection-end-line="148" selection-end-column="24" />
-                  <folding>
-                    <element signature="e#0#20#0" expanded="true" />
-                  </folding>
+                <state relative-caret-position="413">
+                  <caret line="50" column="22" lean-forward="true" selection-start-line="50" selection-start-column="22" selection-end-line="50" selection-end-column="22" />
                 </state>
               </provider>
             </entry>
@@ -84,6 +84,7 @@
       <find>readda</find>
       <find>write</find>
       <find>check</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -437,20 +438,33 @@
       <option name="project" value="LOCAL" />
       <updated>1524083769062</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="split database operations into database_files.py&#10;did not work for check_recip_name">
+      <created>1524146392874</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1524146392875</updated>
+    </task>
+    <task id="LOCAL-00005" summary="optimized the recipe search">
+      <created>1524149953982</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1524149953982</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16666667" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16666667" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3269494" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32968536" />
-      <window_info anchor="bottom" id="Python Console" order="8" weight="0.3371869" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.27633378" />
+      <window_info anchor="bottom" id="Python Console" order="8" weight="0.33652532" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.27633378" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.24973656" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32094595" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -504,11 +518,13 @@
     <MESSAGE value="commit 2" />
     <MESSAGE value="changed StringVar() to NewRecipe" />
     <MESSAGE value="started work on ShowEditRecipe" />
-    <option name="LAST_COMMIT_MESSAGE" value="started work on ShowEditRecipe" />
+    <MESSAGE value="split database operations into database_files.py&#10;did not work for check_recip_name" />
+    <MESSAGE value="optimized the recipe search" />
+    <option name="LAST_COMMIT_MESSAGE" value="optimized the recipe search" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <option name="time" value="6" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -613,15 +629,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/database_files.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="14" selection-start-column="14" selection-end-column="14" />
+        <state relative-caret-position="328">
+          <caret line="51" selection-start-line="51" selection-end-line="51" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Rezeptdatenbank.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="148" column="24" lean-forward="true" selection-start-line="148" selection-start-column="24" selection-end-line="148" selection-end-column="24" />
+        <state relative-caret-position="-2176">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
