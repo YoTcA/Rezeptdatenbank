@@ -33,3 +33,22 @@ def write_data(preparation_list, ingredient_list):
     cursor.execute('INSERT INTO recipe VALUES (?,?,?)', preparation_list)
     connection.commit()
 
+def search_recipe_name(recipename):
+    results = []
+    # allow the usage of * as wildcard
+    if recipename == "*":
+        recipename = "%"
+
+    # search for recipe name similar to the input
+    if not recipename == "":
+        for row in cursor.execute('SELECT recipename FROM recipe WHERE recipename LIKE ?', ('%' + recipename + '%',)):
+                    results.append(row)
+    return results
+
+def search_ingredients(ingredients):
+    results = []
+    if ingredients:
+        for ingredient in ingredients:
+            for row in cursor.execute('SELECT recipename FROM ingredients WHERE ingredient=? COLLATE NOCASE', (ingredient,)):
+                results.append(row)
+    return results

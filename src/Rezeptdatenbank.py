@@ -11,21 +11,6 @@ NORMAL_FONT = ("Verdana", 8)
 SMALL_FONT = ("Verdana", 6)
 
 
-'''
-# connect to database Rezeptdatenbank.db
-connection = sqlite3.connect("Rezeptdatenbank.db")
-cursor = connection.cursor()
-cursor.execute("""CREATE TABLE IF NOT EXISTS recipe (
-            recipename TEXT COLLATE NOCASE,
-             duration INTEGER,
-              preparation TEXT)""")
-cursor.execute("""CREATE TABLE IF NOT EXISTS ingredients (
-            recipename TEXT COLLATE NOCASE,
-             quantity REAL,
-              unit TEXT,
-               ingredient TEXT COLLATE NOCASE)""")
-connection.commit()'''
-
 # check if there is already a recipe with the inputed recipe name in the database
 def check_recipe_name():
     recipe_name = NewRecipe.sv.get()
@@ -56,24 +41,6 @@ def isfloat(value):
 class Recipedb(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
-        '''
-
-        # Connect to Database
-        self.connection = sqlite3.connect("Rezeptdatenbank.db")
-        self.cursor = self.connection.cursor()
-
-        # Create Database if not exist
-        self.cursor.execute("""CREATE TABLE IF NOT EXISTS recipe (
-            recipename TEXT COLLATE NOCASE,
-             duration INTEGER,
-              preparation TEXT)""")
-        self.cursor.execute("""CREATE TABLE IF NOT EXISTS ingredients (
-            recipename TEXT COLLATE NOCASE,
-             quantity REAL,
-              unit TEXT,
-               ingredient TEXT COLLATE NOCASE)""")
-
-        self.connection.commit()'''
 
         # Adjust Title and Icon
         tk.Tk.iconbitmap(self, default="auge_ava_50_Q5O_icon.ico")
@@ -116,8 +83,6 @@ class Recipedb(tk.Tk):
         # shows the desired frame
         frame = self.frames[cont]
         frame.tkraise()
-
-
 
 
 class StartPage(tk.Frame):
@@ -280,26 +245,28 @@ class SearchRecipe(tk.Frame):
 
         def search_recipes(recipe_name, ingredients):
             results = []
-
-            # replace * with % to allow the use of * as a wildcard
-            if recipe_name == "*":
-                recipe_name = "%"
-
-            # search for recipe name similar to the input
-            if not recipe_name == "":
-                for row in cursor.execute('SELECT recipename FROM recipe WHERE recipename LIKE ?', ('%'+recipe_name+'%',)):
+            # execute if a recipe_name is given
+            print(recipe_name)
+            if recipe_name:
+                for row in database_files.search_recipe_name((recipe_name)):
                     results.append(row)
 
             # divide the ingredients into single items
             ingredient_result = []
-            if len(ingredients)>0:
+            if len(ingredients) > 0:
                 rows = ingredients.splitlines()
                 for row in rows:
                     ingredient_result.append(re.split('\W+\s', row))
+            ingredient_result = [item for sublist in ingredient_result for item in sublist]
             print(ingredient_result)
 
-            if not ingredients == "":
-                for row in cursor.execute('SELECT recipename FROM ingredients WHERE ingredient=? COLLATE NOCASE', (ingredients,)):
+            #execute when ingredient_result is not empty
+            '''if ingredient_result:
+                results.append(database_files.search_ingredients(ingredient_result))'''
+
+
+            if ingredient_result:
+                for row in database_files.search_ingredients(ingredient_result): #database_files.cursor.execute('SELECT recipename FROM ingredients WHERE ingredient=? COLLATE NOCASE', (ingredients,)):
                     results.append(row)
             # empty the listbox before adding new items
             lbx_recipelist.delete(0, tk.END)
