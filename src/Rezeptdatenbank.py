@@ -33,11 +33,6 @@ def isfloat(value):
 
 
 
-
-
-
-
-
 class Recipedb(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
