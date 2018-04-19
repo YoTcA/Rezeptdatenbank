@@ -1,14 +1,18 @@
-from tkinter import *
+import sqlite3
 
-root = Tk()
-sv = StringVar()
+# connect to database Rezeptdatenbank.db
+connection = sqlite3.connect("Rezeptdatenbank.db")
+cursor = connection.cursor()
+cursor.execute("""CREATE TABLE IF NOT EXISTS recipe (
+            recipename TEXT COLLATE NOCASE,
+             duration INTEGER,
+              preparation TEXT)""")
+cursor.execute("""CREATE TABLE IF NOT EXISTS ingredients (
+            recipename TEXT COLLATE NOCASE,
+             quantity REAL,
+              unit TEXT,
+               ingredient TEXT COLLATE NOCASE)""")
+connection.commit()
 
-def callback():
-    print(sv.get())
-    return True
-
-e = Entry(root, textvariable=sv, validate="focusout", validatecommand=callback)
-e.grid()
-e = Entry(root)
-e.grid()
-root.mainloop()
+for row in cursor.execute('SELECT ? FROM recipe WHERE recipename=?', ("duration", "asdf",)):
+    print(row)

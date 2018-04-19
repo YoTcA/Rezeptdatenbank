@@ -52,3 +52,9 @@ def search_ingredients(ingredients):
             for row in cursor.execute('SELECT recipename FROM ingredients WHERE ingredient=? COLLATE NOCASE', (ingredient,)):
                 results.append(row)
     return results
+
+def get_value(id, database, value):
+    return cursor.execute('SELECT ? FROM ? WHERE recipename=?', (value, database, id,))
+
+def get_preparation(recipe_name):
+    return cursor.execute('SELECT preparation FROM recipe WHERE recipename=?', (recipe_name))
