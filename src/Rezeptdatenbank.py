@@ -4,13 +4,14 @@ from tkinter import messagebox
 
 import sqlite3
 import re
+import database_files
 
 LARGE_FONT = ("Verdana", 12)
 NORMAL_FONT = ("Verdana", 8)
 SMALL_FONT = ("Verdana", 6)
 
 
-
+'''
 # connect to database Rezeptdatenbank.db
 connection = sqlite3.connect("Rezeptdatenbank.db")
 cursor = connection.cursor()
@@ -23,39 +24,12 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS ingredients (
              quantity REAL,
               unit TEXT,
                ingredient TEXT COLLATE NOCASE)""")
-connection.commit()
-
-
-def isfloat(value):
-    try:
-        float(value)
-        return True
-    except ValueError:
-        return False
-
-def readData():
-    # read all data from database
-    for row in cursor.execute('SELECT * FROM ingredients'):
-        print(row)
-    for row in cursor.execute('SELECT * FROM recipe'):
-        print(row)
-
-def write_data(preparation_list, ingredient_list):
-    # write input to database
-    for i in range(len(ingredient_list[3])):
-        ingredients = []
-        ingredients.append(ingredient_list[0])
-        for a in range(1, 4):
-            ingredients.append(ingredient_list[a][i])
-        cursor.execute('INSERT INTO ingredients VALUES (?,?,?,?)', ingredients)
-    connection.commit()
-    cursor.execute('INSERT INTO recipe VALUES (?,?,?)', preparation_list)
-    connection.commit()
+connection.commit()'''
 
 # check if there is already a recipe with the inputed recipe name in the database
 def check_recipe_name():
     recipe_name = NewRecipe.sv.get()
-    for recipe in cursor.execute('SELECT recipename FROM recipe'):
+    for recipe in database_files.cursor.execute('SELECT recipename FROM recipe'):
         if recipe_name.strip() in recipe:
             tmp_value = messagebox.askyesno("Rezeptname bereits vergeben.",
                                             "Rezeptname bereits vergeben. Rezept zum Bearbeiten öffnen?")
@@ -64,6 +38,19 @@ def check_recipe_name():
             else:
                 print("nicht öffnen")
     return True
+
+def isfloat(value):
+    try:
+        float(value)
+        return True
+    except ValueError:
+        return False
+
+
+
+
+
+
 
 
 class Recipedb(tk.Tk):
@@ -143,7 +130,6 @@ class StartPage(tk.Frame):
 
 class NewRecipe(tk.Frame):
     # create the page to input a new recipe
-
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         NewRecipe.sv = tk.StringVar()
@@ -165,7 +151,8 @@ class NewRecipe(tk.Frame):
         lab_preparation = tk.Label(self, text="Zubereitung: ")
         lab_ingredients = tk.Label(self, text="Zutaten: ")
         '''Entryboxes'''
-        ent_recipe_name = tk.Entry(self, width=40, textvariable=NewRecipe.sv, validate="focusout", validatecommand=check_recipe_name)
+        ent_recipe_name = tk.Entry(self, width=40, textvariable=NewRecipe.sv, validate="focusout",
+                                   validatecommand=check_recipe_name)
         ent_duration = tk.Entry(self, width=10)
         txt_ingredients = tk.Text(self, width=40, height=10)
         txt_ingredients.bind("<Tab>", controller.focus_next_window)
@@ -178,9 +165,9 @@ class NewRecipe(tk.Frame):
                                                                     txt_preparation.get("1.0", "end-1c"),
                                                                     txt_ingredients.get("1.0", "end-1c")))
         but_save = tk.Button(self, text="Speichern",
-                                  command= lambda: write_data(self.preparation_results,
-                                                                         self.ingredient_results))
-        but_read = tk.Button(self, text="Text", command=readData)
+                                  command= lambda: database_files.write_data(self.preparation_results,
+                                                                             self.ingredient_results))
+        but_read = tk.Button(self, text="Text", command=database_files.readall)
         but_clear = tk.Button(self, text="Neues Rezept", command=clear_entries)
 
         '''GUI Elemente positionieren'''
@@ -368,7 +355,7 @@ class ShowEditRecipe(tk.Frame):
         '''Buttons'''
         but_check = tk.Button(self, text="Prüfen")
         but_save = tk.Button(self, text="Speichern")
-        but_read = tk.Button(self, text="Text", command=readData)
+        but_read = tk.Button(self, text="Text", command=database_files.readall)
         but_clear = tk.Button(self, text="Neues Rezept")
 
         '''GUI Elemente positionieren'''
