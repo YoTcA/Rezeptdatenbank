@@ -31,7 +31,20 @@ def isfloat(value):
     except ValueError:
         return False
 
-
+def open_recipe(recipe_name):
+    if recipe_name:
+        print("Rezeptname: " + recipe_name)
+        duration = database_files.get_duration(recipe_name)
+        preparation = database_files.get_preparation(recipe_name)
+        ingredients = database_files.get_ingredients(recipe_name)
+        '''if recipe_name:
+        ShowEditRecipe.ent_recipe_name(state="normal")
+        ShowEditRecipe.ent_recipe_name(tk.END, recipe_name)
+        ShowEditRecipe.ent_recipe_name(state="readonly")'''
+        print("Dauer: " + str(duration))
+        print("Preparation: " + str(preparation))
+        print("Zutaten: " + str(ingredients))
+    # print(map(int, lbx_recipelist.curselection()))
 
 class Recipedb(tk.Tk):
     def __init__(self, *args, **kwargs):
@@ -47,6 +60,8 @@ class Recipedb(tk.Tk):
         butt_new.pack(side=tk.LEFT, padx=2, pady=2)
         butt_search = ttk.Button(toolbar, text="Rezept suchen", command=lambda: self.show_frame(SearchRecipe))
         butt_search.pack(side=tk.LEFT, padx=2, pady=2)
+        butt_display = ttk.Button(toolbar, text="Rezept anzeigen", command=lambda: self.show_frame(ShowEditRecipe))
+        butt_display.pack(side=tk.LEFT, padx=2, pady=2)
         butt_edit = ttk.Button(toolbar, text="Rezept bearbeiten", command=lambda: self.show_frame(ShowEditRecipe))
         butt_edit.pack(side=tk.LEFT, padx=2, pady=2)
         toolbar.pack(side=tk.TOP, fill=tk.X)
@@ -271,18 +286,7 @@ class SearchRecipe(tk.Frame):
                 lbx_recipelist.insert(0, result)
             return True
 
-        def open_recipe():
-            recipe_name = lbx_recipelist.get(tk.ACTIVE)[0]
-            if recipe_name:
-                print("Rezeptname: " + recipe_name)
-                duration = database_files.get_duration(recipe_name)
-                preparation = database_files.get_preparation(recipe_name)
-                ingredients = database_files.get_ingredients(recipe_name)
 
-            print("Dauer: " + str(duration))
-            print("Preparation: " + str(preparation))
-            print("Zutaten: " + str(ingredients))
-            # print(map(int, lbx_recipelist.curselection()))
 
         # GUI-Elemente erstellen
         lbl_recipe_name = tk.Label(self, text="Rezeptname:")
@@ -294,7 +298,8 @@ class SearchRecipe(tk.Frame):
         lbx_recipelist = tk.Listbox(self, selectmode=tk.SINGLE)
         but_search = ttk.Button(self, text="Suchen",
                                 command=lambda: search_recipes(ent_recipe_name.get(), txt_ingredients.get("1.0", "end-1c")))
-        but_open = ttk.Button(self, text="Anzeigen", command=open_recipe)
+        but_open = ttk.Button(self, text="Anzeigen",
+                              command=lambda: open_recipe(lbx_recipelist.get(tk.ACTIVE)[0]))
         # GUI-Elemente positionieren
         lbl_recipe_name.grid(row=0, column=0, sticky=tk.E)
         ent_recipe_name.grid(row=0, column=1, sticky=tk.NSEW)
@@ -318,7 +323,7 @@ class ShowEditRecipe(tk.Frame):
         lab_preparation = tk.Label(self, text="Zubereitung: ")
         lab_ingredients = tk.Label(self, text="Zutaten: ")
         '''Entryboxes'''
-        ent_recipe_name = tk.Entry(self, width=40)
+        self.ent_recipe_name = tk.Entry(self, width=40)
         ent_duration = tk.Entry(self, width=10)
         txt_ingredients = tk.Text(self, width=40, height=10)
         txt_ingredients.bind("<Tab>", controller.focus_next_window)
@@ -332,7 +337,7 @@ class ShowEditRecipe(tk.Frame):
 
         '''GUI Elemente positionieren'''
         lab_recipe_name.grid(row=0, column=0, sticky=tk.NE)
-        ent_recipe_name.grid(row=0, column=1, columnspan=2, padx=2, pady=2, sticky=tk.W)
+        self.ent_recipe_name.grid(row=0, column=1, columnspan=2, padx=2, pady=2, sticky=tk.W)
         lab_duration.grid(row=1, column=0, sticky=tk.NE)
         ent_duration.grid(row=1, column=1, padx=2, pady=2, sticky=tk.NSEW)
         lab_minutes.grid(row=1, column=2, sticky=tk.NW)
@@ -344,11 +349,11 @@ class ShowEditRecipe(tk.Frame):
         but_save.grid(row=4, column=1)
         but_read.grid(row=4, column=2)
         but_clear.grid(row=4, column=3)
-        ent_recipe_name.config(state="readonly")
+        self.ent_recipe_name.config(state="readonly")
 
-        ent_recipe_name.config(state="normal")
-        ent_recipe_name.insert(tk.END, "Testname")
-        ent_recipe_name.config(state="readonly")
+        self.ent_recipe_name.config(state="normal")
+        self.ent_recipe_name.insert(tk.END, "Testname")
+        self.ent_recipe_name.config(state="readonly")
 
 
 app = Recipedb()
