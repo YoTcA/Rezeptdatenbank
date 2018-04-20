@@ -14,5 +14,5 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS ingredients (
                ingredient TEXT COLLATE NOCASE)""")
 connection.commit()
 
-for row in cursor.execute('SELECT ? FROM recipe WHERE recipename=?', ("duration", "asdf",)):
+for row in cursor.execute('SELECT duration FROM recipe WHERE recipename=?', ("asdf",)):
     print(row)

@@ -53,8 +53,24 @@ def search_ingredients(ingredients):
                 results.append(row)
     return results
 
-def get_value(id, database, value):
-    return cursor.execute('SELECT ? FROM ? WHERE recipename=?', (value, database, id,))
+def get_duration(recipe_name):
+    result = cursor.execute('SELECT duration FROM recipe WHERE recipename=?', (recipe_name,)).fetchone()
+    if result:
+        return result[0]
+    else:
+        return False
+
+
 
 def get_preparation(recipe_name):
-    return cursor.execute('SELECT preparation FROM recipe WHERE recipename=?', (recipe_name))
+    result = cursor.execute('SELECT preparation FROM recipe WHERE recipename=?', (recipe_name,)).fetchone()
+    if result:
+        return result[0]
+    else:
+        return False
+
+def get_ingredients(recipe_name):
+    result = []
+    for row in cursor.execute('SELECT quantity, unit, ingredient from ingredients WHERE recipename=?', (recipe_name,)):
+        result.append(row)
+    return result

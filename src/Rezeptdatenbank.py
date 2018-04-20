@@ -272,10 +272,16 @@ class SearchRecipe(tk.Frame):
             return True
 
         def open_recipe():
-            recipe_name = lbx_recipelist.get(tk.ACTIVE)
-            duration = database_files.get_value(recipe_name, "recipe", "duration")
-            print(duration)
-            print(recipe_name)
+            recipe_name = lbx_recipelist.get(tk.ACTIVE)[0]
+            if recipe_name:
+                print("Rezeptname: " + recipe_name)
+                duration = database_files.get_duration(recipe_name)
+                preparation = database_files.get_preparation(recipe_name)
+                ingredients = database_files.get_ingredients(recipe_name)
+
+            print("Dauer: " + str(duration))
+            print("Preparation: " + str(preparation))
+            print("Zutaten: " + str(ingredients))
             # print(map(int, lbx_recipelist.curselection()))
 
         # GUI-Elemente erstellen
