@@ -54,21 +54,10 @@ class Recipedb(tk.Tk):
         tk.Tk.iconbitmap(self, default="auge_ava_50_Q5O_icon.ico")
         tk.Tk.wm_title(self, "Rezeptdatenbank V 0.1")
 
-        # Toolbar
-        toolbar = tk.Frame(self)
-        butt_new = ttk.Button(toolbar, text="Neues Rezept", command=lambda: self.show_frame(NewRecipe))
-        butt_new.pack(side=tk.LEFT, padx=2, pady=2)
-        butt_search = ttk.Button(toolbar, text="Rezept suchen", command=lambda: self.show_frame(SearchRecipe))
-        butt_search.pack(side=tk.LEFT, padx=2, pady=2)
-        butt_display = ttk.Button(toolbar, text="Rezept anzeigen", command=lambda: self.show_frame(ShowEditRecipe))
-        butt_display.pack(side=tk.LEFT, padx=2, pady=2)
-        butt_edit = ttk.Button(toolbar, text="Rezept bearbeiten", command=lambda: self.show_frame(ShowEditRecipe))
-        butt_edit.pack(side=tk.LEFT, padx=2, pady=2)
-        toolbar.pack(side=tk.TOP, fill=tk.X)
-
         # Initial window size
         #self.geometry('400x400')
         #self.wm_minsize(200,200)
+        toolbar = Toolbar(self)
 
         #Initialize Window
         container = tk.Frame(self)
@@ -93,6 +82,21 @@ class Recipedb(tk.Tk):
         # shows the desired frame
         frame = self.frames[cont]
         frame.tkraise()
+
+class Toolbar(tk.Frame):
+    def __init__(self, parent):
+        tk.Frame.__init__(self, parent)
+        toolbar = tk.Frame(parent)
+        butt_new = ttk.Button(toolbar, text="Neues Rezept", command=lambda: parent.show_frame(NewRecipe))
+        butt_new.pack(side=tk.LEFT, padx=2, pady=2)
+        butt_search = ttk.Button(toolbar, text="Rezept suchen", command=lambda: parent.show_frame(SearchRecipe))
+        butt_search.pack(side=tk.LEFT, padx=2, pady=2)
+        butt_display = ttk.Button(toolbar, text="Rezept anzeigen", command=lambda: parent.show_frame(ShowEditRecipe))
+        butt_display.pack(side=tk.LEFT, padx=2, pady=2)
+        butt_edit = ttk.Button(toolbar, text="Rezept bearbeiten", command=lambda: parent.show_frame(ShowEditRecipe))
+        butt_edit.pack(side=tk.LEFT, padx=2, pady=2)
+        toolbar.pack(side=tk.TOP, fill=tk.X)
+
 
 
 class StartPage(tk.Frame):
