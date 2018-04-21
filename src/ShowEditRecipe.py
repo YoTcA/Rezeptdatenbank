@@ -1,17 +1,9 @@
 import tkinter as tk
 import database_files
 
-
-def get_data(recipe_name, duration, ingredient_list, preparation):
-    print(recipe_name)
-    print(duration)
-    print(ingredient_list)
-    print(preparation)
-
-
 class ShowEditRecipe(tk.Frame):
-
-
+    def test(self):
+        print("ok")
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -23,12 +15,12 @@ class ShowEditRecipe(tk.Frame):
         lab_preparation = tk.Label(self, text="Zubereitung: ")
         lab_ingredients = tk.Label(self, text="Zutaten: ")
         '''Entryboxes'''
-        self.ent_recipe_name = tk.Entry(self, width=40)
-        ent_duration = tk.Entry(self, width=10)
-        txt_ingredients = tk.Text(self, width=40, height=10)
-        txt_ingredients.bind("<Tab>", controller.focus_next_window)
-        txt_preparation = tk.Text(self, width=40, height=10)
-        txt_preparation.bind("<Tab>", controller.focus_next_window)
+        ent_recipe_name = tk.Entry(self, width=40)
+        self.ent_duration = tk.Entry(self, width=10)
+        self.txt_ingredients = tk.Text(self, width=40, height=10)
+        self.txt_ingredients.bind("<Tab>", controller.focus_next_window)
+        self.txt_preparation = tk.Text(self, width=40, height=10)
+        self.txt_preparation.bind("<Tab>", controller.focus_next_window)
         '''Buttons'''
         but_check = tk.Button(self, text="Prüfen")
         but_save = tk.Button(self, text="Speichern")
@@ -37,20 +29,29 @@ class ShowEditRecipe(tk.Frame):
 
         '''GUI Elemente positionieren'''
         lab_recipe_name.grid(row=0, column=0, sticky=tk.NE)
-        self.ent_recipe_name.grid(row=0, column=1, columnspan=2, padx=2, pady=2, sticky=tk.W)
+        ent_recipe_name.grid(row=0, column=1, columnspan=2, padx=2, pady=2, sticky=tk.W)
         lab_duration.grid(row=1, column=0, sticky=tk.NE)
-        ent_duration.grid(row=1, column=1, padx=2, pady=2, sticky=tk.NSEW)
+        self.ent_duration.grid(row=1, column=1, padx=2, pady=2, sticky=tk.NSEW)
         lab_minutes.grid(row=1, column=2, sticky=tk.NW)
         lab_ingredients.grid(row=2, column=0, sticky=tk.NE)
-        txt_ingredients.grid(row=2, column=1, columnspan=2, padx=2, pady=2, sticky=tk.NW)
+        self.txt_ingredients.grid(row=2, column=1, columnspan=2, padx=2, pady=2, sticky=tk.NW)
         lab_preparation.grid(row=3, column=0, sticky=tk.NE)
-        txt_preparation.grid(row=3, column=1, columnspan=2, padx=2, pady=2, sticky=tk.NW)
+        self.txt_preparation.grid(row=3, column=1, columnspan=2, padx=2, pady=2, sticky=tk.NW)
         but_check.grid(row=4, column=0)
         but_save.grid(row=4, column=1)
         but_read.grid(row=4, column=2)
         but_clear.grid(row=4, column=3)
-        self.ent_recipe_name.config(state="readonly")
+        ent_recipe_name.config(state="readonly")
 
-        self.ent_recipe_name.config(state="normal")
-        self.ent_recipe_name.insert(tk.END, "Testname")
-        self.ent_recipe_name.config(state="readonly")
+        ent_recipe_name.config(state="normal")
+        ent_recipe_name.insert(tk.END, "Testname")
+        ent_recipe_name.config(state="readonly")
+
+def get_data(Page, recipe_name, duration, ingredient_list, preparation):
+    print(recipe_name)
+    print(duration)
+    print(ingredient_list)
+    print(preparation)
+    Page.ent_recipe_name.config(state="normal")
+    Page.ent_recipe_name.insert(tk.END, recipe_name)
+    Page.ent_recipe_name.config(state="readonly")
