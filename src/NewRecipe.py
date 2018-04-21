@@ -83,14 +83,6 @@ class NewRecipe(tk.Frame):
         but_save.grid(row=4, column=1)
         but_read.grid(row=4, column=2)
         but_clear.grid(row=4, column=3)
-        '''
-        button1 = ttk.Button(self, text="Back to Home",
-                            command=lambda: controller.show_frame(StartPage))
-        button1.pack()
-
-        button2 = ttk.Button(self, text="Page Two",
-                             command=lambda: controller.show_frame(SearchRecipe))
-        button2.pack()'''
 
     def save_recipe(self, recipe_name, duration, preparation, ingredient_txt):
         if recipe_name:
@@ -149,10 +141,6 @@ class NewRecipe(tk.Frame):
             database_files.write_data(recipelist, ingredientlist)
         else:
             messagebox.showerror("Fehleneder Rezeptname", "Bitte einen Rezeptnamen eingeben.")
-
-
-
-
 
 
     def doublespace(self, text):

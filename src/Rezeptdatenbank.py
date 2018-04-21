@@ -34,6 +34,7 @@ def open_recipe(recipe_name):
         print("Dauer: " + str(duration))
         print("Preparation: " + str(preparation))
         print("Zutaten: " + str(ingredients))
+        ShowEditRecipe.ShowEditRecipe.get_data(recipe_name, duration, ingredients, preparation)
     # print(map(int, lbx_recipelist.curselection()))
 
 class Recipedb(tk.Tk):
@@ -166,8 +167,6 @@ class SearchRecipe(tk.Frame):
         lbl_result_list.grid(row=3, column=0, sticky=tk.E)
         lbx_recipelist.grid(row=3, column=1, sticky=tk.NSEW)
         but_open.grid(row=4, column=0)
-
-
 
 
 app = Recipedb()

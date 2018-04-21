@@ -1,7 +1,17 @@
 import tkinter as tk
 import database_files
 
+
+def get_data(recipe_name, duration, ingredient_list, preparation):
+    print(recipe_name)
+    print(duration)
+    print(ingredient_list)
+    print(preparation)
+
+
 class ShowEditRecipe(tk.Frame):
+
+
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
