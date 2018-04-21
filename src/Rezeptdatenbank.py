@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, StringVar
 from tkinter import messagebox
+import ToolBar
 
 import sqlite3
 import re
@@ -57,7 +58,11 @@ class Recipedb(tk.Tk):
         # Initial window size
         #self.geometry('400x400')
         #self.wm_minsize(200,200)
-        toolbar = Toolbar(self)
+
+        pages = (StartPage, NewRecipe, SearchRecipe, ShowEditRecipe)
+
+        toolbar = ToolBar.Toolbar(self, pages)
+        toolbar.pack()
 
         #Initialize Window
         container = tk.Frame(self)
@@ -66,12 +71,14 @@ class Recipedb(tk.Tk):
         container.grid_columnconfigure(0, weight=1)
         self.frames = {}
 
+
         # Load all pages
-        for F in (StartPage, NewRecipe, SearchRecipe, ShowEditRecipe):
+        for F in pages:
             frame = F(container, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
         self.show_frame(StartPage)
+
 
     # jump to next selection on Tab instead of indenting the text
     def focus_next_window(self, event):
@@ -83,7 +90,7 @@ class Recipedb(tk.Tk):
         frame = self.frames[cont]
         frame.tkraise()
 
-class Toolbar(tk.Frame):
+'''class Toolbar(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
         toolbar = tk.Frame(parent)
@@ -95,7 +102,7 @@ class Toolbar(tk.Frame):
         butt_display.pack(side=tk.LEFT, padx=2, pady=2)
         butt_edit = ttk.Button(toolbar, text="Rezept bearbeiten", command=lambda: parent.show_frame(ShowEditRecipe))
         butt_edit.pack(side=tk.LEFT, padx=2, pady=2)
-        toolbar.pack(side=tk.TOP, fill=tk.X)
+        toolbar.pack(side=tk.TOP, fill=tk.X)'''
 
 
 
