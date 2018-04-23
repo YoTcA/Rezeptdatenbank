@@ -28,6 +28,8 @@ class NewRecipe(tk.Frame):
     # create the page to input a new recipe
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+        self.parent = parent
+        self.controller = controller
         NewRecipe.sv = tk.StringVar()
 
         self.preparation_results = []

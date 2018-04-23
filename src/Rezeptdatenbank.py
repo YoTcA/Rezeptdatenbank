@@ -67,14 +67,19 @@ class Recipedb(tk.Tk):
         frame = self.frames[cont]
         frame.tkraise()
 
+    def testio(self):
+        print("hello")
+
 
 class StartPage(tk.Frame):
     # create the startpage
     def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
+        super().__init__(parent)
+        self.parent = parent
+        self.controller = controller
         label = tk.Label(self, text="Welcome", font=LARGE_FONT)
         label.pack(pady=10, padx=10)
-
+        self.controller.testio()
 
 
 app = Recipedb()
