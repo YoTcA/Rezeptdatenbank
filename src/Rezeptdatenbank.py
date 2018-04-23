@@ -67,21 +67,6 @@ class Recipedb(tk.Tk):
         frame = self.frames[cont]
         frame.tkraise()
 
-'''class Toolbar(tk.Frame):
-    def __init__(self, parent):
-        tk.Frame.__init__(self, parent)
-        toolbar = tk.Frame(parent)
-        butt_new = ttk.Button(toolbar, text="Neues Rezept", command=lambda: parent.show_frame(NewRecipe))
-        butt_new.pack(side=tk.LEFT, padx=2, pady=2)
-        butt_search = ttk.Button(toolbar, text="Rezept suchen", command=lambda: parent.show_frame(SearchRecipe))
-        butt_search.pack(side=tk.LEFT, padx=2, pady=2)
-        butt_display = ttk.Button(toolbar, text="Rezept anzeigen", command=lambda: parent.show_frame(ShowEditRecipe))
-        butt_display.pack(side=tk.LEFT, padx=2, pady=2)
-        butt_edit = ttk.Button(toolbar, text="Rezept bearbeiten", command=lambda: parent.show_frame(ShowEditRecipe))
-        butt_edit.pack(side=tk.LEFT, padx=2, pady=2)
-        toolbar.pack(side=tk.TOP, fill=tk.X)'''
-
-
 
 class StartPage(tk.Frame):
     # create the startpage
@@ -93,5 +78,6 @@ class StartPage(tk.Frame):
 
 
 app = Recipedb()
+Newrecipepage = NewRecipe.NewRecipe(app, Recipedb)
 
 app.mainloop()
