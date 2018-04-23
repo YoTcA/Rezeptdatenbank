@@ -1,18 +1,20 @@
 import tkinter as tk
-import Testsecond
 
 
-class Mainpage(tk.Tk):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for row in args:
-            print(row)
-        toolbar = tk.Frame(self)
-        toolbar.pack()
-        self.container = tk.Frame()
-        self.container.pack()
+class Statusbar(tk.Frame):
+    def __init__(self):
+        super().__init__()
+        self.test = tk.Button(self, text="blub")
+        self.test.pack()
 
-app = Mainpage()
-button = tk.Button(Mainpage.container, text="hello")
 
-app.mainloop()
+class MainApplication(tk.Tk):
+    def __init__(self, parent, *args, **kwargs):
+        super().__init__(parent, *args, **kwargs)
+        self.statusbar = Statusbar(self)
+
+root = MainApplication()
+#scnd = Secondpage(root)
+#button = tk.Button(Mainpage.container, text="hello")
+
+root.mainloop()
