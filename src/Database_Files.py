@@ -60,7 +60,9 @@ def get_duration(recipe_name):
     else:
         return False
 
-
+def get_all_recipe_name():
+    result = cursor.execute('SELECT recipename FROM recipe')
+    return result
 
 def get_preparation(recipe_name):
     result = cursor.execute('SELECT preparation FROM recipe WHERE recipename=?', (recipe_name,)).fetchone()

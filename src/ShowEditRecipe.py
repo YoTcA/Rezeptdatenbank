@@ -1,5 +1,5 @@
 import tkinter as tk
-import database_files
+import Database_Files
 
 class ShowEditRecipe(tk.Frame):
     def test(self):
@@ -24,7 +24,7 @@ class ShowEditRecipe(tk.Frame):
         '''Buttons'''
         but_check = tk.Button(self, text="Prüfen")
         but_save = tk.Button(self, text="Speichern")
-        but_read = tk.Button(self, text="Text", command=database_files.readall)
+        but_read = tk.Button(self, text="Text", command=Database_Files.readall)
         but_clear = tk.Button(self, text="Neues Rezept")
 
         '''GUI Elemente positionieren'''
