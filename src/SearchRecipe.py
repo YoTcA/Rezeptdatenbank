@@ -2,27 +2,13 @@ import tkinter as tk
 from tkinter import ttk
 import Database_Files
 import re
+import ShowEditRecipe
 
 
 def openrecipe():
     print(SearchRecipe.get_active)
 
-def open_recipe(recipe_name):
-    if recipe_name:
-        print("Rezeptname: " + recipe_name)
-        duration = Database_Files.get_duration(recipe_name)
-        preparation = Database_Files.get_preparation(recipe_name)
-        ingredients = Database_Files.get_ingredients(recipe_name)
-        '''if recipe_name:
-        ShowEditRecipe.ent_recipe_name(state="normal")
-        ShowEditRecipe.ent_recipe_name(tk.END, recipe_name)
-        ShowEditRecipe.ent_recipe_name(state="readonly")'''
-        print("Dauer: " + str(duration))
-        print("Preparation: " + str(preparation))
-        print("Zutaten: " + str(ingredients))
-        #ShowEditRecipe.get_data(ShowEditRecipe.ShowEditRecipe, recipe_name, duration, ingredients, preparation)
-        #ShowEditRecipe.ShowEditRecipe.test(ShowEditRecipe)
-    # print(map(int, lbx_recipelist.curselection()))
+
 
 class SearchRecipe(tk.Frame):
     def get_active(self):
@@ -32,11 +18,6 @@ class SearchRecipe(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.parent = parent
         self.controller = controller
-
-
-
-
-
 
         # GUI-Elemente erstellen
         self.lbl_recipe_name = tk.Label(self, text="Rezeptname:")
@@ -92,3 +73,22 @@ class SearchRecipe(tk.Frame):
         for result in list(set(results)):
             self.lbx_recipelist.insert(0, result)
         return True
+
+    def open_recipe(self, recipe_name):
+        if recipe_name:
+            print("Rezeptname: " + recipe_name)
+            duration = Database_Files.get_duration(recipe_name)
+            ingredients = Database_Files.get_ingredients(recipe_name)
+            preparation = Database_Files.get_preparation(recipe_name)
+            self.parent.ShowEditRecipe.open_recipe(recipe_name, duration, ingredients, preparation)
+            '''if recipe_name:
+            ShowEditRecipe.ent_recipe_name(state="normal")
+            ShowEditRecipe.ent_recipe_name(tk.END, recipe_name)
+            ShowEditRecipe.ent_recipe_name(state="readonly")'''
+            print("Dauer: " + str(duration))
+            print("Preparation: " + str(preparation))
+            print("Zutaten: " + str(ingredients))
+            # ShowEditRecipe.get_data(ShowEditRecipe.ShowEditRecipe, recipe_name, duration, ingredients, preparation)
+            # ShowEditRecipe.ShowEditRecipe.test(ShowEditRecipe)
+        # print(map(int, lbx_recipelist.curselection()))
+

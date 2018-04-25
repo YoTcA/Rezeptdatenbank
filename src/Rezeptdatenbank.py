@@ -56,6 +56,7 @@ class Recipedb(tk.Tk):
 
 
 
+
 class StartPage(tk.Frame):
     # create the startpage
     def __init__(self, parent, controller):
