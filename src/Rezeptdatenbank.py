@@ -1,5 +1,6 @@
 import tkinter as tk
-import ToolBar
+import TopBar
+
 import ShowEditRecipe
 import NewRecipe
 import SearchRecipe
@@ -27,14 +28,20 @@ class Recipedb(tk.Tk):
                  "SearchRecipe": SearchRecipe.SearchRecipe,
                  "ShowEditRecipe": ShowEditRecipe.ShowEditRecipe}
 
-        toolbar = ToolBar.Toolbar(self, self.pages)
-        toolbar.pack(side="top")
+        topbar = TopBar.Toolbar(self, self.pages)
+        topbar.pack(side="top", fill=tk.X)
 
         # Initialize Window
         container = tk.Frame(self)
         container.pack(side="top", fill="both", expand=True)
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
+
+        self.button_bar = tk.Frame(self)
+        self.button_bar.pack()
+        testbutton = tk.Button(self.button_bar, text="Test")
+        testbutton.pack()
+
         self.frames = {}
 
         # Load all pages

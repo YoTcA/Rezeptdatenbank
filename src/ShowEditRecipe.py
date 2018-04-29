@@ -71,6 +71,8 @@ class ShowEditRecipe(tk.Frame):
     #             field.config(state="disabled")
     def test(self):
         print(self.txt_ingredients.get("1.0", "end-1c"))
+        a= self.controller.button_bar
+
 
 
 def get_data(Page, recipe_name, duration, ingredient_list, preparation):

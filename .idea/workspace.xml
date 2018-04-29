@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8009c2c2-0d4c-418e-9861-48d096aa5fc3" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Bottombar.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Database_Files.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Database_Files.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Rezeptdatenbank.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rezeptdatenbank.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SearchRecipe.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/SearchRecipe.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ShowEditRecipe.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ShowEditRecipe.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ToolBar.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ToolBar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ToolBar.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/TopBar.py" afterDir="false" />
     </list>
     <ignored path="Rezeptdatenbank.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,8 +38,23 @@
           <file leaf-file-name="Rezeptdatenbank.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/Rezeptdatenbank.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="453">
-                  <caret line="77" column="40" lean-forward="true" selection-start-line="77" selection-start-column="40" selection-end-line="77" selection-end-column="40" />
+                <state relative-caret-position="119">
+                  <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+                  <folding>
+                    <element signature="e#0#20#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Bottombar.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/Bottombar.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state>
+                  <caret selection-end-line="7" />
+                  <folding>
+                    <element signature="e#0#20#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -82,11 +95,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="ToolBar.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/ToolBar.py">
+          <file leaf-file-name="TopBar.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/TopBar.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="272">
-                  <caret line="16" selection-start-line="16" selection-end-line="16" />
+                <state relative-caret-position="238">
+                  <caret line="14" selection-start-line="14" selection-end-line="14" />
                   <folding>
                     <element signature="e#0#20#0" expanded="true" />
                   </folding>
@@ -98,11 +111,11 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="ToolBar.py" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/ToolBar.py">
+          <file leaf-file-name="TopBar.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/TopBar.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="221">
-                  <caret line="13" column="106" selection-start-line="13" selection-start-column="106" selection-end-line="13" selection-end-column="106" />
+                <state relative-caret-position="238">
+                  <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
                   <folding>
                     <element signature="e#0#20#0" expanded="true" />
                   </folding>
@@ -190,6 +203,8 @@
         <option value="$PROJECT_DIR$/src/SearchRecipe.py" />
         <option value="$PROJECT_DIR$/src/Database_Files.py" />
         <option value="$PROJECT_DIR$/src/ToolBar.py" />
+        <option value="$PROJECT_DIR$/src/TopBar.py" />
+        <option value="$PROJECT_DIR$/src/Bottombar.py" />
         <option value="$PROJECT_DIR$/src/Rezeptdatenbank.py" />
       </list>
     </option>
@@ -314,6 +329,24 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
+    <configuration name="TopBar" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Rezeptdatenbank" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/TopBar.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Rezeptdatenbank" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -327,24 +360,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/test2/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration name="secondpage" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Rezeptdatenbank" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/test2" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="F:\_Eigene Dateien\Dokumente\_Python\Rezeptdatenbank\test\test2\SecondPage.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -487,17 +502,17 @@
     <list>
       <item itemvalue="Python.Rezeptdatenbank (1)" />
       <item itemvalue="Python.main" />
-      <item itemvalue="Python.secondpage" />
       <item itemvalue="Python.SecondPage" />
       <item itemvalue="Python.SearchRecipe" />
+      <item itemvalue="Python.TopBar" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.Rezeptdatenbank (1)" />
+        <item itemvalue="Python.TopBar" />
         <item itemvalue="Python.SearchRecipe" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.SecondPage" />
-        <item itemvalue="Python.secondpage" />
       </list>
     </recent_temporary>
   </component>
@@ -631,7 +646,14 @@
       <option name="project" value="LOCAL" />
       <updated>1524987802187</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="show and edit window now allow or disallow the edit of the fields">
+      <created>1525038074881</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1525038074881</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -719,7 +741,8 @@
     <MESSAGE value="pause" />
     <MESSAGE value="found a way" />
     <MESSAGE value="started integrating in main programm" />
-    <option name="LAST_COMMIT_MESSAGE" value="started integrating in main programm" />
+    <MESSAGE value="show and edit window now allow or disallow the edit of the fields" />
+    <option name="LAST_COMMIT_MESSAGE" value="show and edit window now allow or disallow the edit of the fields" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -734,13 +757,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test/test2/main2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="57" column="14" lean-forward="true" selection-end-line="57" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/test2/SecondPage.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
@@ -863,6 +879,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="589">
           <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -918,10 +937,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ToolBar.py">
+    <entry file="file://$PROJECT_DIR$/src/TopBar.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="238">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Bottombar.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="7" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
@@ -930,8 +959,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Rezeptdatenbank.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="77" column="40" lean-forward="true" selection-start-line="77" selection-start-column="40" selection-end-line="77" selection-end-column="40" />
+        <state relative-caret-position="119">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
