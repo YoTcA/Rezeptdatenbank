@@ -13,10 +13,10 @@ class TestApp(tk.Tk):
         container.grid_columnconfigure(0, weight=1)
         self.frames = {}
 
-        self.pages = (StartPage, SecondPage.SecondPage)
+        self.pages = {"StartPage": StartPage, "SecondPage": SecondPage.SecondPage}
         #self.pages = pages
         # Load all pages
-        for F in self.pages:
+        for key, F in self.pages.items():
             frame = F(container, self, self.pages)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
@@ -47,21 +47,28 @@ class StartPage(tk.Frame):
         self.pages = pages
         # define GUI elements
         self.label = tk.Label(self, text="test")
-        button = tk.Button(self, text="2nd Page", command=lambda: controller.show_frame(pages[1]))
+        button = tk.Button(self, text="2nd Page", command=lambda: controller.show_frame(pages["SecondPage"]))
         but_change2nd = tk.Button(self, text="Change Label on SecondPage", command=lambda: self.send_text2("Hello, too!"))
-
+        self.lbx_box = tk.Listbox(self, selectmode=tk.SINGLE)
+        but_read = tk.Button(self, text="Text auslesen", command=lambda: self.read_item())
         # place GUI elements
         self.label.grid(row=0, column=0)
         button.grid(row=1, column=0)
         but_change2nd.grid(row=2, column=0)
+        self.lbx_box.grid(row=3, column=0)
+        but_read.grid(row=4, column=0)
+        for value in ['one', 'two', 'Three']:
+            self.lbx_box.insert(0, value)
 
-        # send text to SecondPage
-        # def send_text(text):
-        #     controller.frames[pages[1]].label.config(text=text)
-        #     #controller.pass_on_text2(text)
+    def read_item(self):
+        item = self.lbx_box.curselection()
+        value = self.lbx_box.get(self.lbx_box.curselection())
+        print(item)
+        print(value)
+        return True
 
     def send_text2(self, text):
-        self.controller.frames[self.pages[1]].label.config(text=text)
+        self.controller.frames[self.pages["SecondPage"]].label.config(text=text)
 
     # get information and change the displayed text
     def get_text(self, text):

@@ -9,10 +9,11 @@ import Functions
 
 class NewRecipe(tk.Frame):
     # create the page to input a new recipe
-    def __init__(self, parent, controller):
+    def __init__(self, parent, controller, pages):
         tk.Frame.__init__(self, parent)
         self.parent = parent
         self.controller = controller
+        self.pages = pages
 
         self.sv = tk.StringVar()
         self.preparation_results = []

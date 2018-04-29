@@ -4,24 +4,13 @@ import Database_Files
 
 
 class ShowEditRecipe(tk.Frame):
-    def test(self):
-        print("ok")
 
-    def open_recipe(self, recipe_name, duration, ingredients, preparaition):
-        fields = [self.ent_duration, self.ent_duration, self.txt_ingredients, self.txt_preparation]
-        values = [recipe_name, duration, ingredients, preparaition]
-        i = 0
-        for field in fields:
-            field.config(state="normal")
-            field.insert(tk.END, values[i])
-            i += 1
-            if field.winfo_class() == "Entry":
-                field.config(state="readonly")
-            elif field.winfo_class() == "Text":
-                field.config(state="disabled")
-
-    def __init__(self, parent, controller):
+    def __init__(self, parent, controller, pages):
         tk.Frame.__init__(self, parent)
+        self.parent = parent
+        self.controller = controller
+        self.pages = pages
+
         # GUI Elemente definieren
         # Label
         self.lab_recipe_name = tk.Label(self, text="Rezeptname: ")
@@ -60,10 +49,26 @@ class ShowEditRecipe(tk.Frame):
 
         self.ent_recipe_name.config(state="normal")
         self.ent_recipe_name.insert(tk.END, "Testname")
-        self.ent_recipe_name.config(state="readonly")
+        #self.ent_recipe_name.config(state="readonly")
         self.txt_preparation.config(state="normal")
         self.txt_preparation.insert(tk.END, "Testname")
-        self.txt_preparation.config(state="disabled")
+        #self.txt_preparation.config(state="disabled")
+
+    def test(self):
+        print("ok")
+
+    def open_recipe(self, recipe_name, duration, ingredients, preparaition):
+        fields = [self.ent_duration, self.ent_duration, self.txt_ingredients, self.txt_preparation]
+        values = [recipe_name, duration, ingredients, preparaition]
+        i = 0
+        for field in fields:
+            field.config(state="normal")
+            field.insert(tk.END, values[i])
+            i += 1
+            if field.winfo_class() == "Entry":
+                field.config(state="readonly")
+            elif field.winfo_class() == "Text":
+                field.config(state="disabled")
 
 
 def get_data(Page, recipe_name, duration, ingredient_list, preparation):

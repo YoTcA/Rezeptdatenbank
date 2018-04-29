@@ -22,9 +22,12 @@ class Recipedb(tk.Tk):
         # self.geometry('400x400')
         # self.wm_minsize(200,200)
 
-        pages = (StartPage, NewRecipe.NewRecipe, SearchRecipe.SearchRecipe, ShowEditRecipe.ShowEditRecipe)
+        self.pages = {"StartPage": StartPage,
+                 "NewRecipe": NewRecipe.NewRecipe,
+                 "SearchRecipe": SearchRecipe.SearchRecipe,
+                 "ShowEditRecipe": ShowEditRecipe.ShowEditRecipe}
 
-        toolbar = ToolBar.Toolbar(self, pages)
+        toolbar = ToolBar.Toolbar(self, self.pages)
         toolbar.pack(side="top")
 
         # Initialize Window
@@ -35,8 +38,8 @@ class Recipedb(tk.Tk):
         self.frames = {}
 
         # Load all pages
-        for F in pages:
-            frame = F(container, self)
+        for key, F in self.pages.items():
+            frame = F(container, self, self.pages)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
         self.show_frame(StartPage)
@@ -59,7 +62,7 @@ class Recipedb(tk.Tk):
 
 class StartPage(tk.Frame):
     # create the startpage
-    def __init__(self, parent, controller):
+    def __init__(self, parent, controller, pages):
         super().__init__(parent)
         self.parent = parent
         self.controller = controller

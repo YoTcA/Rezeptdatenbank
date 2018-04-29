@@ -14,10 +14,11 @@ class SearchRecipe(tk.Frame):
     def get_active(self):
         return self.lbx_recipelist.get(tk.ACTIVE)[0]
 
-    def __init__(self, parent, controller):
+    def __init__(self, parent, controller, pages):
         tk.Frame.__init__(self, parent)
         self.parent = parent
         self.controller = controller
+        self.pages = pages
 
         # GUI-Elemente erstellen
         self.lbl_recipe_name = tk.Label(self, text="Rezeptname:")
@@ -30,7 +31,7 @@ class SearchRecipe(tk.Frame):
         self.but_search = ttk.Button(self, text="Suchen",
                                 command=lambda: self.search_recipes(self.ent_recipe_name.get(), self.txt_ingredients.get("1.0", "end-1c")))
         self.but_open = ttk.Button(self, text="Anzeigen",
-                              command=openrecipe)#open_recipe(self.lbx_recipelist.get(tk.ACTIVE)[0]))
+                              command=self.open_recipe)#open_recipe(self.lbx_recipelist.get(tk.ACTIVE)[0]))
         # GUI-Elemente positionieren
         self.lbl_recipe_name.grid(row=0, column=0, sticky=tk.E)
         self.ent_recipe_name.grid(row=0, column=1, sticky=tk.NSEW)
@@ -63,32 +64,45 @@ class SearchRecipe(tk.Frame):
             results.append(database_files.search_ingredients(ingredient_result))'''
 
         if ingredient_result:
-            for row in Database_Files.search_ingredients(
-                    ingredient_result):  # database_files.cursor.execute('SELECT recipename FROM ingredients WHERE ingredient=? COLLATE NOCASE', (ingredients,)):
+            for row in Database_Files.search_ingredients(ingredient_result):
                 results.append(row)
         # empty the listbox before adding new items
         self.lbx_recipelist.delete(0, tk.END)
 
         # eliminate double entries in results and add the unique values to the listbox
         for result in list(set(results)):
-            self.lbx_recipelist.insert(0, result)
+            self.lbx_recipelist.insert(0, str(result))
         return True
 
-    def open_recipe(self, recipe_name):
+    def open_recipe(self):
+        selection = self.lbx_recipelist.curselection()
+        recipe_name = self.lbx_recipelist.get(selection)
+        target = self.controller.frames[self.pages["ShowEditRecipe"]]
+        # fields = [target.ent_duration, target.ent_duration, target.txt_ingredients, target.txt_preparation]
+        # values = [recipe_name, duration, ingredients, preparaition]
+        target.ent_recipe_name.delete(0, tk.END)
+        target.ent_duration.delete(0, tk.END)
+        target.txt_ingredients.delete('1.0', tk.END)
+        target.txt_preparation.delete('1.0', tk.END)
+
         if recipe_name:
-            print("Rezeptname: " + recipe_name)
+            # read the values from the database
             duration = Database_Files.get_duration(recipe_name)
             ingredients = Database_Files.get_ingredients(recipe_name)
             preparation = Database_Files.get_preparation(recipe_name)
-            self.parent.ShowEditRecipe.open_recipe(recipe_name, duration, ingredients, preparation)
-            '''if recipe_name:
-            ShowEditRecipe.ent_recipe_name(state="normal")
-            ShowEditRecipe.ent_recipe_name(tk.END, recipe_name)
-            ShowEditRecipe.ent_recipe_name(state="readonly")'''
+
+            # values = [recipe_name, duration, ingredients, preparation]
+            # fields = [target.ent_recipe_name, target.ent_duration, target.txt_ingredients, target.txt_preparation]
+            # for field, value in zip(fields, values):
+            #     field.config(state="normal")
+            #     field.insert(tk.END, value)
+            target.ent_recipe_name.config(text=str(recipe_name))
+            target.ent_duration.config(text=duration)
+            target.txt_ingredients.insert(tk.END, ingredients)
+            target.txt_preparation.insert(tk.END, preparation)
+            print("Rezeptname: " + str(recipe_name))
             print("Dauer: " + str(duration))
             print("Preparation: " + str(preparation))
             print("Zutaten: " + str(ingredients))
-            # ShowEditRecipe.get_data(ShowEditRecipe.ShowEditRecipe, recipe_name, duration, ingredients, preparation)
-            # ShowEditRecipe.ShowEditRecipe.test(ShowEditRecipe)
-        # print(map(int, lbx_recipelist.curselection()))
+        return True
 
