@@ -21,7 +21,7 @@ class ShowEditRecipe(tk.Frame):
         # Entryboxes
         self.ent_recipe_name = tk.Entry(self, width=40)
         self.ent_duration = tk.Entry(self, width=10)
-        self.txt_ingredients = tk.Text(self, width=40, height=10)
+        self.txt_ingredients = tk.Text(self, width=40, height=10, tabs=('1.5c', '3c', '12c', '13c'))
         self.txt_ingredients.bind("<Tab>", controller.focus_next_window)
         self.txt_preparation = tk.Text(self, width=40, height=10)
         self.txt_preparation.bind("<Tab>", controller.focus_next_window)

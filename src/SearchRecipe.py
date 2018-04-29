@@ -86,7 +86,7 @@ class SearchRecipe(tk.Frame):
             ingredient_list = ""
             # convert the database result to a line formated text
             for value in ingredients:
-                ingredient_list = ingredient_list + self.controller.double_space(value.strip()) + "\n"
+                ingredient_list = ingredient_list + value + "\n"
             preparation = Database_Files.get_preparation(recipe_name)
             print("ingredientresult: " + ingredient_list)
             values = [recipe_name, duration, ingredient_list, preparation]
