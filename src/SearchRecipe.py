@@ -78,31 +78,34 @@ class SearchRecipe(tk.Frame):
         selection = self.lbx_recipelist.curselection()
         recipe_name = self.lbx_recipelist.get(selection)
         target = self.controller.frames[self.pages["ShowEditRecipe"]]
-        # fields = [target.ent_duration, target.ent_duration, target.txt_ingredients, target.txt_preparation]
-        # values = [recipe_name, duration, ingredients, preparaition]
-        target.ent_recipe_name.delete(0, tk.END)
-        target.ent_duration.delete(0, tk.END)
-        target.txt_ingredients.delete('1.0', tk.END)
-        target.txt_preparation.delete('1.0', tk.END)
 
         if recipe_name:
             # read the values from the database
             duration = Database_Files.get_duration(recipe_name)
             ingredients = Database_Files.get_ingredients(recipe_name)
+            ingredient_list = ""
+            # convert the database result to a line formated text
+            for value in ingredients:
+                ingredient_list = ingredient_list + self.controller.double_space(value.strip()) + "\n"
             preparation = Database_Files.get_preparation(recipe_name)
+            print("ingredientresult: " + ingredient_list)
+            values = [recipe_name, duration, ingredient_list, preparation]
+            fields = [target.ent_recipe_name, target.ent_duration, target.txt_ingredients, target.txt_preparation]
+            for field, value in zip(fields, values):
+                if field.winfo_class() == "Entry":
+                    field.config(state="normal")
+                    field.delete(0, tk.END)
+                    field.insert(tk.END, value)
+                    field.config(state="readonly")
+                elif field.winfo_class() == "Text":
+                    field.config(state="normal")
+                    field.delete('1.0', tk.END)
+                    field.insert(tk.END, value)
+                    field.config(state="disabled")
 
-            # values = [recipe_name, duration, ingredients, preparation]
-            # fields = [target.ent_recipe_name, target.ent_duration, target.txt_ingredients, target.txt_preparation]
-            # for field, value in zip(fields, values):
-            #     field.config(state="normal")
-            #     field.insert(tk.END, value)
-            target.ent_recipe_name.config(text=str(recipe_name))
-            target.ent_duration.config(text=duration)
-            target.txt_ingredients.insert(tk.END, ingredients)
-            target.txt_preparation.insert(tk.END, preparation)
-            print("Rezeptname: " + str(recipe_name))
-            print("Dauer: " + str(duration))
-            print("Preparation: " + str(preparation))
-            print("Zutaten: " + str(ingredients))
+            # print("Rezeptname: " + str(recipe_name))
+            # print("Dauer: " + str(duration))
+            # print("Preparation: " + str(preparation))
+            # print("Zutaten: " + str(ingredients))
         return True
 

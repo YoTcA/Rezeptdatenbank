@@ -127,13 +127,6 @@ class NewRecipe(tk.Frame):
                 ingredients.append(ingredient)
             ingredientlist = [recipe_name, quantities, units, ingredients]
             recipelist = [recipe_name, duration, preparation]
-            # ingredientlist.append(recipe_name)
-            # ingredientlist.append(quantities)
-            # ingredientlist.append(units)
-            # ingredientlist.append(ingredients)
-            # recipelist.append(recipe_name)
-            # recipelist.append(duration)
-            # recipelist.append(preparation)
             Database_Files.write_data(recipelist, ingredientlist)
         else:
             messagebox.showerror("Fehleneder Rezeptname", "Bitte einen Rezeptnamen eingeben.")

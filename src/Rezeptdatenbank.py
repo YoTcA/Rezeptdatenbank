@@ -54,6 +54,11 @@ class Recipedb(tk.Tk):
         frame = self.frames[cont]
         frame.tkraise()
 
+    def double_space(self, text):
+        while "  " in text:
+           text = text.replace("  ", " ")
+        return text
+
     def testio(self):
         print("hello")
 

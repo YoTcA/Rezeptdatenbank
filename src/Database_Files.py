@@ -74,5 +74,8 @@ def get_preparation(recipe_name):
 def get_ingredients(recipe_name):
     result = []
     for row in cursor.execute('SELECT quantity, unit, ingredient from ingredients WHERE recipename=?', (recipe_name,)):
-        result.append(row)
+        ingredient = ""
+        for item in row:
+            ingredient = ingredient + str(item) + " "
+        result.append(ingredient)
     return result
