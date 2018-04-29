@@ -1,28 +1,13 @@
 import tkinter as tk
-from tkinter import ttk, StringVar
-from tkinter import messagebox
 import ToolBar
 import ShowEditRecipe
 import NewRecipe
 import SearchRecipe
 
-import sqlite3
-import re
-import database_files
 
 LARGE_FONT = ("Verdana", 12)
 NORMAL_FONT = ("Verdana", 8)
 SMALL_FONT = ("Verdana", 6)
-
-
-
-def isfloat(value):
-    try:
-        float(value)
-        return True
-    except ValueError:
-        return False
-
 
 
 class Recipedb(tk.Tk):
@@ -34,25 +19,27 @@ class Recipedb(tk.Tk):
         tk.Tk.wm_title(self, "Rezeptdatenbank V 0.1")
 
         # Initial window size
-        #self.geometry('400x400')
-        #self.wm_minsize(200,200)
+        # self.geometry('400x400')
+        # self.wm_minsize(200,200)
 
-        pages = (StartPage, NewRecipe.NewRecipe, SearchRecipe.SearchRecipe, ShowEditRecipe.ShowEditRecipe)
+        self.pages = {"StartPage": StartPage,
+                 "NewRecipe": NewRecipe.NewRecipe,
+                 "SearchRecipe": SearchRecipe.SearchRecipe,
+                 "ShowEditRecipe": ShowEditRecipe.ShowEditRecipe}
 
-        toolbar = ToolBar.Toolbar(self, pages)
-        toolbar.pack()
+        toolbar = ToolBar.Toolbar(self, self.pages)
+        toolbar.pack(side="top")
 
-        #Initialize Window
+        # Initialize Window
         container = tk.Frame(self)
         container.pack(side="top", fill="both", expand=True)
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
         self.frames = {}
 
-
         # Load all pages
-        for F in pages:
-            frame = F(container, self)
+        for key, F in self.pages.items():
+            frame = F(container, self, self.pages)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
         self.show_frame(StartPage)
@@ -62,18 +49,25 @@ class Recipedb(tk.Tk):
         event.widget.tk_focusNext().focus()
         return("break")
 
+    # shows the desired frame
     def show_frame(self, cont):
-        # shows the desired frame
         frame = self.frames[cont]
         frame.tkraise()
+
+    def double_space(self, text):
+        while "  " in text:
+           text = text.replace("  ", " ")
+        return text
 
     def testio(self):
         print("hello")
 
 
+
+
 class StartPage(tk.Frame):
     # create the startpage
-    def __init__(self, parent, controller):
+    def __init__(self, parent, controller, pages):
         super().__init__(parent)
         self.parent = parent
         self.controller = controller
@@ -82,7 +76,6 @@ class StartPage(tk.Frame):
         self.controller.testio()
 
 
-app = Recipedb()
-Newrecipepage = NewRecipe.NewRecipe(app, Recipedb)
-
-app.mainloop()
+if __name__ == "__main__":
+    app = Recipedb()
+    app.mainloop()

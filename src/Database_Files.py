@@ -42,7 +42,7 @@ def search_recipe_name(recipename):
     # search for recipe name similar to the input
     if not recipename == "":
         for row in cursor.execute('SELECT recipename FROM recipe WHERE recipename LIKE ?', ('%' + recipename + '%',)):
-                    results.append(row)
+                    results.append(row[0])
     return results
 
 def search_ingredients(ingredients):
@@ -50,7 +50,7 @@ def search_ingredients(ingredients):
     if ingredients:
         for ingredient in ingredients:
             for row in cursor.execute('SELECT recipename FROM ingredients WHERE ingredient=? COLLATE NOCASE', (ingredient,)):
-                results.append(row)
+                results.append(row[0])
     return results
 
 def get_duration(recipe_name):
@@ -60,7 +60,9 @@ def get_duration(recipe_name):
     else:
         return False
 
-
+def get_all_recipe_name():
+    result = cursor.execute('SELECT recipename FROM recipe')
+    return result
 
 def get_preparation(recipe_name):
     result = cursor.execute('SELECT preparation FROM recipe WHERE recipename=?', (recipe_name,)).fetchone()
@@ -72,5 +74,8 @@ def get_preparation(recipe_name):
 def get_ingredients(recipe_name):
     result = []
     for row in cursor.execute('SELECT quantity, unit, ingredient from ingredients WHERE recipename=?', (recipe_name,)):
-        result.append(row)
+        ingredient = ""
+        for item in row:
+            ingredient = ingredient + str(item) + "\t"
+        result.append(ingredient)
     return result
