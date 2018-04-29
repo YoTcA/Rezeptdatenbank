@@ -83,12 +83,10 @@ class SearchRecipe(tk.Frame):
             # read the values from the database
             duration = Database_Files.get_duration(recipe_name)
             ingredients = Database_Files.get_ingredients(recipe_name)
-            ingredient_list = ""
             # convert the database result to a line formated text
-            for value in ingredients:
-                ingredient_list = ingredient_list + value + "\n"
+            ingredient_list = "\n".join(ingredients)
             preparation = Database_Files.get_preparation(recipe_name)
-            print("ingredientresult: " + ingredient_list)
+            print("ingredientresult: " + repr(ingredient_list))
             values = [recipe_name, duration, ingredient_list, preparation]
             fields = [target.ent_recipe_name, target.ent_duration, target.txt_ingredients, target.txt_preparation]
             for field, value in zip(fields, values):

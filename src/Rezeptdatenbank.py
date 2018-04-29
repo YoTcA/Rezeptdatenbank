@@ -59,10 +59,24 @@ class Recipedb(tk.Tk):
            text = text.replace("  ", " ")
         return text
 
-    def testio(self):
-        print("hello")
+    def show_recipe(self):
+        frame = self.frames[self.pages["ShowEditRecipe"]]
+        frame.tkraise()
+        fields = [frame.ent_recipe_name, frame.ent_duration, frame.txt_ingredients, frame.txt_preparation]
+        for field in fields:
+            if field.winfo_class() == "Entry":
+                field.config(state="readonly")
+            elif field.winfo_class() == "Text":
+                field.config(state="disabled")
+        return True
 
-
+    def edit_recipe(self):
+        frame = self.frames[self.pages["ShowEditRecipe"]]
+        frame.tkraise()
+        fields = [frame.ent_recipe_name, frame.ent_duration, frame.txt_ingredients, frame.txt_preparation]
+        for field in fields:
+            field.config(state="normal")
+        return True
 
 
 class StartPage(tk.Frame):
@@ -73,7 +87,6 @@ class StartPage(tk.Frame):
         self.controller = controller
         label = tk.Label(self, text="Welcome", font=LARGE_FONT)
         label.pack(pady=10, padx=10)
-        self.controller.testio()
 
 
 if __name__ == "__main__":

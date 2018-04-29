@@ -26,7 +26,7 @@ class ShowEditRecipe(tk.Frame):
         self.txt_preparation = tk.Text(self, width=40, height=10)
         self.txt_preparation.bind("<Tab>", controller.focus_next_window)
         # Buttons
-        self.but_check = tk.Button(self, text="Prüfen")
+        self.but_check = tk.Button(self, text="Prüfen", command=self.test)
         self.but_save = tk.Button(self, text="Speichern")
         self.but_read = tk.Button(self, text="Text", command=Database_Files.readall)
         self.but_clear = tk.Button(self, text="Neues Rezept")
@@ -54,21 +54,23 @@ class ShowEditRecipe(tk.Frame):
         self.txt_preparation.insert(tk.END, "Testname")
         #self.txt_preparation.config(state="disabled")
 
+    # def test(self):
+    #     print("ok")
+    #
+    # def open_recipe(self, recipe_name, duration, ingredients, preparaition):
+    #     fields = [self.ent_duration, self.ent_duration, self.txt_ingredients, self.txt_preparation]
+    #     values = [recipe_name, duration, ingredients, preparaition]
+    #     i = 0
+    #     for field in fields:
+    #         field.config(state="normal")
+    #         field.insert(tk.END, values[i])
+    #         i += 1
+    #         if field.winfo_class() == "Entry":
+    #             field.config(state="readonly")
+    #         elif field.winfo_class() == "Text":
+    #             field.config(state="disabled")
     def test(self):
-        print("ok")
-
-    def open_recipe(self, recipe_name, duration, ingredients, preparaition):
-        fields = [self.ent_duration, self.ent_duration, self.txt_ingredients, self.txt_preparation]
-        values = [recipe_name, duration, ingredients, preparaition]
-        i = 0
-        for field in fields:
-            field.config(state="normal")
-            field.insert(tk.END, values[i])
-            i += 1
-            if field.winfo_class() == "Entry":
-                field.config(state="readonly")
-            elif field.winfo_class() == "Text":
-                field.config(state="disabled")
+        print(self.txt_ingredients.get("1.0", "end-1c"))
 
 
 def get_data(Page, recipe_name, duration, ingredient_list, preparation):
