@@ -1,5 +1,6 @@
 import tkinter as tk
 import Database_Files
+from tkinter import ttk
 
 
 
@@ -10,6 +11,9 @@ class ShowEditRecipe(tk.Frame):
         self.parent = parent
         self.controller = controller
         self.pages = pages
+
+
+
 
         # GUI Elemente definieren
         # Label
@@ -25,11 +29,17 @@ class ShowEditRecipe(tk.Frame):
         self.txt_ingredients.bind("<Tab>", controller.focus_next_window)
         self.txt_preparation = tk.Text(self, width=40, height=10)
         self.txt_preparation.bind("<Tab>", controller.focus_next_window)
+
+        #Frame for Buttons
+        self.frame_buttons = tk.Frame(self)
+
         # Buttons
-        self.but_check = tk.Button(self, text="Prüfen", command=self.test)
-        self.but_save = tk.Button(self, text="Speichern")
-        self.but_read = tk.Button(self, text="Text", command=Database_Files.readall)
-        self.but_clear = tk.Button(self, text="Neues Rezept")
+        self.but_check = ttk.Button(self.frame_buttons, text="Prüfen", width=12,
+                                   command=self.test)
+        self.but_save = ttk.Button(self.frame_buttons, text="Speichern", width=12)
+        self.but_read = ttk.Button(self.frame_buttons, text="Text", width=12,
+                                  command=Database_Files.readall)
+        self.but_clear = ttk.Button(self.frame_buttons, text="Neues Rezept", width=12)
 
         # GUI Elemente positionieren
         self.lab_recipe_name.grid(row=0, column=0, sticky=tk.NE)
@@ -41,18 +51,20 @@ class ShowEditRecipe(tk.Frame):
         self.txt_ingredients.grid(row=2, column=1, columnspan=2, padx=2, pady=2, sticky=tk.NW)
         self.lab_preparation.grid(row=3, column=0, sticky=tk.NE)
         self.txt_preparation.grid(row=3, column=1, columnspan=2, padx=2, pady=2, sticky=tk.NW)
-        self.but_check.grid(row=4, column=0)
-        self.but_save.grid(row=4, column=1)
-        self.but_read.grid(row=4, column=2)
-        self.but_clear.grid(row=4, column=3)
-        self.ent_recipe_name.config(state="readonly")
+        # get the grid size, to always pack the buttons on the buttom
+        column, row = self.grid_size()
+        self.frame_buttons.grid(row=row, column=0, columnspan=column+2, sticky=tk.EW)
+        self.but_check.grid(row=0, column=0, padx=2, pady=2, sticky=tk.EW)
+        self.but_save.grid(row=0, column=1, padx=2, pady=2, sticky=tk.EW)
+        self.but_read.grid(row=0, column=2, padx=2, pady=2, sticky=tk.EW)
+        self.but_clear.grid(row=0, column=3, padx=2, pady=2, sticky=tk.EW)
+        # get the grid size, to always pack the buttons on the buttom
+        column, row = self.frame_buttons.grid_size()
+        for i in range(column):
+            self.frame_buttons.columnconfigure(i, weight=1)
 
-        self.ent_recipe_name.config(state="normal")
         self.ent_recipe_name.insert(tk.END, "Testname")
-        #self.ent_recipe_name.config(state="readonly")
-        self.txt_preparation.config(state="normal")
         self.txt_preparation.insert(tk.END, "Testname")
-        #self.txt_preparation.config(state="disabled")
 
     # def test(self):
     #     print("ok")

@@ -6,14 +6,20 @@ import NewRecipe
 import SearchRecipe
 
 
-LARGE_FONT = ("Verdana", 12)
-NORMAL_FONT = ("Verdana", 8)
-SMALL_FONT = ("Verdana", 6)
+
 
 
 class Recipedb(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
+
+        # define fonts
+        self.LARGE_FONT = ("Helvetica", 12)
+        self.NORMAL_FONT = ("Helvetica", 9)
+        self.SMALL_FONT = ("Helvetica", 8)
+
+        # change all fonts
+        self.option_add("*Font", self.NORMAL_FONT)
 
         # Adjust Title and Icon
         tk.Tk.iconbitmap(self, default="auge_ava_50_Q5O_icon.ico")
@@ -36,11 +42,6 @@ class Recipedb(tk.Tk):
         container.pack(side="top", fill="both", expand=True)
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
-
-        self.button_bar = tk.Frame(self)
-        self.button_bar.pack()
-        testbutton = tk.Button(self.button_bar, text="Test")
-        testbutton.pack()
 
         self.frames = {}
 
@@ -74,7 +75,7 @@ class Recipedb(tk.Tk):
             if field.winfo_class() == "Entry":
                 field.config(state="readonly")
             elif field.winfo_class() == "Text":
-                field.config(state="disabled")
+                field.config(state="disabled", bg="#F0F0F0")
         return True
 
     def edit_recipe(self):
@@ -82,7 +83,7 @@ class Recipedb(tk.Tk):
         frame.tkraise()
         fields = [frame.ent_recipe_name, frame.ent_duration, frame.txt_ingredients, frame.txt_preparation]
         for field in fields:
-            field.config(state="normal")
+            field.config(state="normal", bg="#FFFFFF")
         return True
 
 
@@ -92,7 +93,7 @@ class StartPage(tk.Frame):
         super().__init__(parent)
         self.parent = parent
         self.controller = controller
-        label = tk.Label(self, text="Welcome", font=LARGE_FONT)
+        label = tk.Label(self, text="Welcome", font=controller.LARGE_FONT)
         label.pack(pady=10, padx=10)
 
 

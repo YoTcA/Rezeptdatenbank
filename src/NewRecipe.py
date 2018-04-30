@@ -1,7 +1,9 @@
 import tkinter as tk
 from tkinter import messagebox
+from tkinter import ttk
 import Database_Files
 import Functions
+
 
 # check if there is already a recipe with the inputed recipe name in the database
 
@@ -34,14 +36,20 @@ class NewRecipe(tk.Frame):
         self.txt_ingredients.bind("<Tab>", controller.focus_next_window)
         self.txt_preparation = tk.Text(self, width=40, height=10)
         self.txt_preparation.bind("<Tab>", controller.focus_next_window)
+
+        # Frame for Buttons
+        self.frame_buttons = tk.Frame(self)
+
         # Buttons
-        self.but_save = tk.Button(self, text="Speichern",
-                                  command= lambda: self.save_recipe(self.ent_recipe_name.get(),
-                                                                    self.ent_duration.get(),
-                                                                    self.txt_preparation.get("1.0", "end-1c"),
-                                                                    self.txt_ingredients.get("1.0", "end-1c")))
-        self.but_read = tk.Button(self, text="Text", command=Database_Files.readall)
-        self.but_clear = tk.Button(self, text="Neues Rezept", command=self.clear_entries)
+        self.but_save = ttk.Button(self.frame_buttons, text="Speichern", width=12,
+                                   command= lambda: self.save_recipe(self.ent_recipe_name.get(),
+                                                                     self.ent_duration.get(),
+                                                                     self.txt_preparation.get("1.0", "end-1c"),
+                                                                     self.txt_ingredients.get("1.0", "end-1c")))
+        self.but_read = ttk.Button(self.frame_buttons, text="Text", width=12,
+                                   command=Database_Files.readall)
+        self.but_clear = ttk.Button(self.frame_buttons, text="Neues Rezept", width=12,
+                                    command=self.clear_entries)
 
         # GUI Elemente positionieren
         self.lab_recipe_name.grid(row=0, column=0, sticky=tk.NE)
@@ -53,10 +61,17 @@ class NewRecipe(tk.Frame):
         self.txt_ingredients.grid(row=2, column=1, columnspan=2, padx=2, pady=2, sticky=tk.NW)
         self.lab_preparation.grid(row=3, column=0, sticky=tk.NE)
         self.txt_preparation.grid(row=3, column=1, columnspan=2, padx=2, pady=2, sticky=tk.NW)
+        # get the grid size, to always pack the buttons on the buttom
+        column, row = self.grid_size()
+        self.frame_buttons.grid(row=row, column=0, columnspan=column + 2, sticky=tk.EW)
         # but_check.grid(row=4, column=0)
-        self.but_save.grid(row=4, column=1)
-        self.but_read.grid(row=4, column=2)
-        self.but_clear.grid(row=4, column=3)
+        self.but_save.grid(row=0, column=0, padx=2, pady=2, sticky=tk.EW)
+        self.but_read.grid(row=0, column=1, padx=2, pady=2, sticky=tk.EW)
+        self.but_clear.grid(row=0, column=2, padx=2, pady=2, sticky=tk.EW)
+        # get the grid size, to always pack the buttons on the buttom
+        column, row = self.frame_buttons.grid_size()
+        for i in range(column):
+            self.frame_buttons.columnconfigure(i, weight=1)
 
     def clear_entries(self):
         if messagebox.askyesno("Neues Rezept", "Alle nicht gespeicherten Daten gehen verloren. Fortfahren?"):

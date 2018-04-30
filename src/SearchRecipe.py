@@ -28,19 +28,31 @@ class SearchRecipe(tk.Frame):
         self.txt_ingredients = tk.Text(self, width=40, height=4)
         self.txt_ingredients.bind("<Tab>", controller.focus_next_window)
         self.lbx_recipelist = tk.Listbox(self, selectmode=tk.SINGLE)
-        self.but_search = ttk.Button(self, text="Suchen",
-                                command=lambda: self.search_recipes(self.ent_recipe_name.get(), self.txt_ingredients.get("1.0", "end-1c")))
-        self.but_open = ttk.Button(self, text="Anzeigen",
-                              command=self.open_recipe)#open_recipe(self.lbx_recipelist.get(tk.ACTIVE)[0]))
+        # Frame for Buttons
+        self.frame_buttons = tk.Frame(self)
+        # Buttons
+        self.but_search = ttk.Button(self.frame_buttons, text="Suchen", width=12,
+                                     command=lambda: self.search_recipes(self.ent_recipe_name.get(), self.txt_ingredients.get("1.0", "end-1c")))
+        self.but_open = ttk.Button(self.frame_buttons, text="Anzeigen", width=12,
+                                   command=self.open_recipe)#open_recipe(self.lbx_recipelist.get(tk.ACTIVE)[0]))
         # GUI-Elemente positionieren
         self.lbl_recipe_name.grid(row=0, column=0, sticky=tk.E)
         self.ent_recipe_name.grid(row=0, column=1, sticky=tk.NSEW)
-        self.but_search.grid(row=0, column=2)
+
         self.lbl_ingredients.grid(row=2, column=0, sticky=tk.E)
         self.txt_ingredients.grid(row=2, column=1, sticky=tk.W)
         self.lbl_result_list.grid(row=3, column=0, sticky=tk.E)
         self.lbx_recipelist.grid(row=3, column=1, sticky=tk.NSEW)
-        self.but_open.grid(row=4, column=0)
+        # get the grid size, to always pack the buttons on the buttom
+        column, row = self.grid_size()
+
+        self.frame_buttons.grid(row=row, column=0, columnspan=column+2, sticky=tk.EW)
+        self.but_search.grid(row=0, column=0, padx=2, pady=2, sticky=tk.EW)
+        self.but_open.grid(row=0, column=1, padx=2, pady=2, sticky=tk.EW)
+        # get the grid size, to always pack the buttons on the buttom
+        column, row = self.frame_buttons.grid_size()
+        for i in range(column):
+            self.frame_buttons.columnconfigure(i, weight=1)
 
     def search_recipes(self, recipe_name, ingredients):
         results = []
