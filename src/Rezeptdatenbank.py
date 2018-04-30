@@ -97,6 +97,5 @@ class StartPage(tk.Frame):
         label.pack(pady=10, padx=10)
 
 
-if __name__ == "__main__":
-    app = Recipedb()
-    app.mainloop()
+app = Recipedb()
+app.mainloop()

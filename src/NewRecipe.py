@@ -27,7 +27,7 @@ class NewRecipe(tk.Frame):
         self.lab_duration = tk.Label(self, text="Dauer: ")
         self.lab_minutes = tk.Label(self, text="min")
         self.lab_preparation = tk.Label(self, text="Zubereitung: ")
-        self.lab_ingredients = tk.Label(self, text="Zutaten: ")
+        self.lab_ingredients = tk.Label(self, text="Zutaten:\n (Bitte Einzahl\nverwenden)", justify=tk.RIGHT)
         # Entryboxes
         self.ent_recipe_name = tk.Entry(self, width=40, textvariable=self.sv, validate="focusout",
                                    validatecommand=self.check_recipe_name)
@@ -152,3 +152,5 @@ class NewRecipe(tk.Frame):
            text = text.replace("  ", " ")
         return text
 
+if __name__ == "__main__":
+    import Rezeptdatenbank

@@ -22,7 +22,7 @@ class SearchRecipe(tk.Frame):
 
         # GUI-Elemente erstellen
         self.lbl_recipe_name = tk.Label(self, text="Rezeptname:")
-        self.lbl_ingredients = tk.Label(self, text="Zutaten:\n (Bitte Einzahl\nverwenden)")
+        self.lbl_ingredients = tk.Label(self, text="Zutaten:\n (Bitte Einzahl\nverwenden)", justify=tk.RIGHT)
         self.lbl_result_list = tk.Label(self, text="Ergebnisse:")
         self.ent_recipe_name = tk.Entry(self)
         self.txt_ingredients = tk.Text(self, width=40, height=4)
@@ -112,10 +112,9 @@ class SearchRecipe(tk.Frame):
                     field.delete('1.0', tk.END)
                     field.insert(tk.END, value)
                     field.config(state="disabled")
+            self.controller.show_recipe()
 
-            # print("Rezeptname: " + str(recipe_name))
-            # print("Dauer: " + str(duration))
-            # print("Preparation: " + str(preparation))
-            # print("Zutaten: " + str(ingredients))
         return True
 
+if __name__ == "__main__":
+    import Rezeptdatenbank

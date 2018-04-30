@@ -95,3 +95,7 @@ def get_data(Page, recipe_name, duration, ingredient_list, preparation):
     Page.ent_recipe_name.config(state="normal")
     Page.ent_recipe_name.insert(tk.END, recipe_name)
     Page.ent_recipe_name.config(state="readonly")
+
+if __name__ == "__main__":
+    import Rezeptdatenbank
+
