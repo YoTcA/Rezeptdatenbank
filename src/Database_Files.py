@@ -33,15 +33,22 @@ def write_data(preparation_list, ingredient_list):
     cursor.execute('INSERT INTO recipe VALUES (?,?,?)', preparation_list)
     connection.commit()
 
-def search_recipe_name(recipename):
+def search_exact_recipe_name(recipe_name):
+    results = []
+    if recipe_name:
+        for row in cursor.execute('SELECT recipename FROM recipe WHERE recipename=?', (recipe_name.strip(),)):
+                    results.append(row[0])
+    return results
+
+def search_recipe_name(recipe_name):
     results = []
     # allow the usage of * as wildcard
-    if recipename == "*":
-        recipename = "%"
+    if recipe_name == "*":
+        recipe_name = "%"
 
     # search for recipe name similar to the input
-    if not recipename == "":
-        for row in cursor.execute('SELECT recipename FROM recipe WHERE recipename LIKE ?', ('%' + recipename + '%',)):
+    if recipe_name:
+        for row in cursor.execute('SELECT recipename FROM recipe WHERE recipename LIKE ?', ('%' + recipe_name + '%',)):
                     results.append(row[0])
     return results
 
@@ -74,11 +81,14 @@ def get_preparation(recipe_name):
 def get_ingredients(recipe_name):
     result = []
     for row in cursor.execute('SELECT quantity, unit, ingredient from ingredients WHERE recipename=?', (recipe_name,)):
-        if row[1]:
-            if float(row[1]) % 1 == 0:
-                row[1] = int(row[1])
+        print(row[0])
         ingredient = ""
-        for item in row:
+        i = 0
+        if row[0]:
+            if float(row[0]) % 1 == 0:
+                ingredient = str(int(row[0])) + "\t"
+                i = 1
+        for item in row[i:]:
             ingredient = ingredient + str(item) + "\t"
         result.append(ingredient.rstrip("\t"))
     return result

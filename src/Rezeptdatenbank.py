@@ -6,9 +6,6 @@ import NewRecipe
 import SearchRecipe
 
 
-
-
-
 class Recipedb(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
@@ -29,10 +26,8 @@ class Recipedb(tk.Tk):
         # self.geometry('400x400')
         # self.wm_minsize(200,200)
 
-        self.pages = {"StartPage": StartPage,
-                 "NewRecipe": NewRecipe.NewRecipe,
-                 "SearchRecipe": SearchRecipe.SearchRecipe,
-                 "ShowEditRecipe": ShowEditRecipe.ShowEditRecipe}
+        self.pages = dict(StartPage=StartPage, NewRecipe=NewRecipe.NewRecipe, SearchRecipe=SearchRecipe.SearchRecipe,
+                          ShowEditRecipe=ShowEditRecipe.ShowEditRecipe)
 
         topbar = TopBar.Toolbar(self, self.pages)
         topbar.pack(side="top", fill=tk.X)
@@ -53,18 +48,20 @@ class Recipedb(tk.Tk):
         self.show_frame(StartPage)
 
     # jump to next selection on Tab instead of indenting the text
-    def focus_next_window(self, event):
+    @staticmethod
+    def focus_next_window(event):
         event.widget.tk_focusNext().focus()
-        return("break")
+        return "break"
 
     # shows the desired frame
     def show_frame(self, cont):
         frame = self.frames[cont]
         frame.tkraise()
 
-    def double_space(self, text):
+    @staticmethod
+    def double_space(text):
         while "  " in text:
-           text = text.replace("  ", " ")
+            text = text.replace("  ", " ")
         return text
 
     def show_recipe(self):

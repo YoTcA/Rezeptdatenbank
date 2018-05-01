@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
 import Database_Files
 import re
 import ShowEditRecipe
@@ -34,7 +35,7 @@ class SearchRecipe(tk.Frame):
         self.but_search = ttk.Button(self.frame_buttons, text="Suchen", width=12,
                                      command=lambda: self.search_recipes(self.ent_recipe_name.get(), self.txt_ingredients.get("1.0", "end-1c")))
         self.but_open = ttk.Button(self.frame_buttons, text="Anzeigen", width=12,
-                                   command=self.open_recipe)#open_recipe(self.lbx_recipelist.get(tk.ACTIVE)[0]))
+                                   command=lambda: self.open_recipe(""))#open_recipe(self.lbx_recipelist.get(tk.ACTIVE)[0]))
         # GUI-Elemente positionieren
         self.lbl_recipe_name.grid(row=0, column=0, sticky=tk.E)
         self.ent_recipe_name.grid(row=0, column=1, sticky=tk.NSEW)
@@ -86,9 +87,13 @@ class SearchRecipe(tk.Frame):
             self.lbx_recipelist.insert(0, str(result))
         return True
 
-    def open_recipe(self):
-        selection = self.lbx_recipelist.curselection()
-        recipe_name = self.lbx_recipelist.get(selection)
+    def open_recipe(self, recipe_name):
+        if not recipe_name:
+            selection = self.lbx_recipelist.curselection()
+            if selection:
+                recipe_name = self.lbx_recipelist.get(selection)
+            else:
+                messagebox.showinfo("Kein Rezept Ausgewählt", "Bitte ein Rezept aus der Liste auswählen.")
         target = self.controller.frames[self.pages["ShowEditRecipe"]]
 
         if recipe_name:
