@@ -1,7 +1,4 @@
 import sys
-#from PyQt5.QtWidgets import *
-#from PyQt5.QtGui import *
-#from PyQt5.QtCore import *
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
@@ -56,8 +53,16 @@ class MainWindow(QtWidgets.QMainWindow):
         self.setGeometry(50, 50, 500, 500)
         self.setWindowTitle("Rezeptdatenbank V0.1")
         #self.show()
-        self.MainWidget = MainWidget(self)
-        self.setCentralWidget(self.MainWidget)
+        '''self.main_window = QtWidgets.QWidget(self)
+        self.main_window.setLayout(QtWidgets.QVBoxLayout(self))
+        self.setCentralWidget(self.main_window)
+        self.main_window.addWidget(MainWidget(self))'''
+        self.main_widget = MainWidget(self)
+        #self.search_widget = SearchWidget(self)
+        #self.setCentralWidget(self.search_widget)
+        self.setCentralWidget(self.main_widget)
+        #self.setCentralWidget(self.search_widget)
+
 
 
 class MainWidget(QtWidgets.QWidget):
@@ -299,6 +304,14 @@ class BotRightWidget(QtWidgets.QWidget):
         instructions_text = QtWidgets.QTextEdit(self)
         instructions_text.setMinimumWidth(300)
         self.layout.addWidget(instructions_text)
+
+class SearchWidget(QtWidgets.QWidget):
+    def __init__(self, parent):
+        super(SearchWidget, self).__init__(parent)
+        self.layout = QtWidgets.QVBoxLayout(self)
+        self.setLayout(self.layout)
+        self.layout.addWidget(QtWidgets.QLabel("Test"))
+
 
 
 app = QtWidgets.QApplication(sys.argv)
