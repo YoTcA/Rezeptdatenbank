@@ -36,12 +36,14 @@ class MainWindow(QtWidgets.QMainWindow):
         menu_save_as = QtWidgets.QAction("Save &As..", self)
         menu_save_as.setShortcut("Ctrl+Shift+S")
         menu_save_as.setStatusTip("Save Recipe As..")
+
         # Exit Programm
         menu_exit = QtWidgets.QAction("&Exit", self)
         menu_exit.setShortcut("Ctrl+Q")
         menu_exit.setStatusTip("Exit Program")
         menu_exit.triggered.connect(self.close)
 
+        # Build menu bar
         menu_bar = self.menuBar()
         menu_file = menu_bar.addMenu("&File")
         menu_file.addAction(menu_new)
@@ -50,6 +52,7 @@ class MainWindow(QtWidgets.QMainWindow):
         menu_file.addAction(menu_save_as)
         menu_file.addAction(menu_exit)
 
+        # Additional start up information
         self.setGeometry(50, 50, 500, 500)
         self.setWindowTitle("Rezeptdatenbank V0.1")
         #self.show()
@@ -81,22 +84,24 @@ class TopWidget(QtWidgets.QWidget):
         self.layout = QtWidgets.QHBoxLayout(self)
         self.layout.setContentsMargins(0, 0, 0, 0)
         self.setLayout(self.layout)
-        top_left = TopLeftWidget(self)
+
+        # Add picture area
+        top_left = TopLeftPicture(self)
         top_left.setFixedSize(150, 150)
         self.layout.addWidget(top_left)
 
+        # Add additional information area
         top_right = TopRightWidget(self)
         self.layout.addWidget(top_right)
 
 
-class TopLeftWidget(QtWidgets.QWidget):
+class TopLeftPicture(QtWidgets.QWidget):
     def __init__(self, parent):
-        super(TopLeftWidget, self).__init__(parent)
+        super(TopLeftPicture, self).__init__(parent)
         self.layout = QtWidgets.QHBoxLayout(self)
         self.setLayout(self.layout)
         picture = QtWidgets.QLabel("Placeholder", self)
         picture.setStyleSheet("background: darkblue")
-
         self.layout.addWidget(picture)
 
 class TopRightWidget(QtWidgets.QWidget):
@@ -104,72 +109,85 @@ class TopRightWidget(QtWidgets.QWidget):
         super(TopRightWidget, self).__init__(parent)
         self.layout = QtWidgets.QVBoxLayout(self)
         self.setLayout(self.layout)
+
+        # Display duration of the recipe
         duration = DurationWidget(self, "Duration:", "No duration available.")
+        self.layout.setAlignment(QtCore.Qt.AlignCenter)
         self.layout.addWidget(duration)
 
-        effort = EffortWidget(self)
+        # Display effort of the recipe
+        effort = EffortAndRatingWidget(self)
         self.layout.addWidget(effort)
 
-        rating = RatingWidget(self)
-        self.layout.addWidget(rating)
 
 class DurationWidget(QtWidgets.QWidget):
     def __init__(self, parent, labeltext, lineeditetext):
         super(DurationWidget, self).__init__(parent)
         self.layout = QtWidgets.QHBoxLayout(self)
         self.setLayout(self.layout)
+
+        # Label
         label = QtWidgets.QLabel(labeltext, self)
         label.setAlignment(QtCore.Qt.AlignRight)
         label.setFixedWidth(55)
         self.layout.addWidget(label)
+
+        # Textbox with Value
         textbox = QtWidgets.QLineEdit(lineeditetext, self)
         textbox.setAlignment(QtCore.Qt.AlignLeft)
         self.layout.addWidget(textbox)
-        self.layout.addStretch()
-
-class EffortWidget(QtWidgets.QWidget):
-    def __init__(self, parent):
-        super(EffortWidget, self).__init__(parent)
-        self.layout = QtWidgets.QHBoxLayout(self)
-        self.setLayout(self.layout)
-        self.label = QtWidgets.QLabel("Effort:")
-        self.label.setAlignment(QtCore.Qt.AlignRight)
-        self.label.setFixedWidth(55)
-        self.layout.addWidget(self.label)
-        self.grid = QtWidgets.QGridLayout()
-        self.grid.setAlignment(QtCore.Qt.AlignLeft)
-        self.grid.setColumnStretch(1, 1)
-        rating1 = self.grid.addWidget(QtWidgets.QRadioButton(), 1, 2)
-        rating2 = self.grid.addWidget(QtWidgets.QRadioButton(), 1, 3)
-        rating3 = self.grid.addWidget(QtWidgets.QRadioButton(), 1, 4)
-        rating4 = self.grid.addWidget(QtWidgets.QRadioButton(), 1, 5)
-        rating5 = self.grid.addWidget(QtWidgets.QRadioButton(), 1, 6)
-        rating1_label = self.grid.addWidget(QtWidgets.QLabel("Low"), 2, 2)
-        rating5_label = self.grid.addWidget(QtWidgets.QLabel("High"), 2, 6)
-        self.layout.addLayout(self.grid)
         self.layout.addStretch(1)
 
-class RatingWidget(QtWidgets.QWidget):
+class EffortAndRatingWidget(QtWidgets.QWidget):
     def __init__(self, parent):
-        super(RatingWidget, self).__init__(parent)
+        super(EffortAndRatingWidget, self).__init__(parent)
         self.layout = QtWidgets.QHBoxLayout(self)
         self.setLayout(self.layout)
-        self.label = QtWidgets.QLabel("Rating:")
-        self.label.setAlignment(QtCore.Qt.AlignRight)
-        self.label.setFixedWidth(55)
-        self.layout.addWidget(self.label)
-        self.grid = QtWidgets.QGridLayout()
-        self.grid.setAlignment(QtCore.Qt.AlignLeft)
-        self.grid.setColumnStretch(1, 1)
-        rating1 = self.grid.addWidget(QtWidgets.QRadioButton(), 1, 2)
-        rating2 = self.grid.addWidget(QtWidgets.QRadioButton(), 1, 3)
-        rating3 = self.grid.addWidget(QtWidgets.QRadioButton(), 1, 4)
-        rating4 = self.grid.addWidget(QtWidgets.QRadioButton(), 1, 5)
-        rating5 = self.grid.addWidget(QtWidgets.QRadioButton(), 1, 6)
-        rating1_label = self.grid.addWidget(QtWidgets.QLabel(" 1"), 2, 2)
-        rating5_label = self.grid.addWidget(QtWidgets.QLabel(" 5"), 2, 6)
-        self.layout.addLayout(self.grid)
+
+        # Add effort label
+        self.effort_label = QtWidgets.QLabel("Effort:")
+        self.effort_label.setAlignment(QtCore.Qt.AlignRight)
+        self.effort_label.setFixedWidth(55)
+        self.layout.addWidget(self.effort_label)
+
+        # Add effort rating radio buttons
+        self.effort_grid = QtWidgets.QGridLayout()
+        self.effort_grid.setAlignment(QtCore.Qt.AlignLeft)
+        self.effort_grid.setColumnStretch(1, 1)
+        self.rating1 = self.effort_grid.addWidget(QtWidgets.QRadioButton(), 1, 2)
+        self.rating2 = self.effort_grid.addWidget(QtWidgets.QRadioButton(), 1, 3)
+        self.rating3 = self.effort_grid.addWidget(QtWidgets.QRadioButton(), 1, 4)
+        self.rating4 = self.effort_grid.addWidget(QtWidgets.QRadioButton(), 1, 5)
+        self.rating5 = self.effort_grid.addWidget(QtWidgets.QRadioButton(), 1, 6)
+
+        # Label radio buttons
+        effort_label_low = QtWidgets.QLabel(" 1")
+        self.effort_grid.addWidget(effort_label_low, 2, 2)
+        self.effort_grid.addWidget(QtWidgets.QLabel(" 5"), 2, 6)
+        self.layout.addLayout(self.effort_grid)
+
+        # Add rating label
+        self.rating_label = QtWidgets.QLabel("Rating:")
+        self.rating_label.setAlignment(QtCore.Qt.AlignRight)
+        self.rating_label.setFixedWidth(55)
+        self.layout.addWidget(self.rating_label)
+
+        # Add effort rating radio buttons
+        self.rating_grid = QtWidgets.QGridLayout()
+        self.rating_grid.setAlignment(QtCore.Qt.AlignLeft)
+        self.rating_grid.setColumnStretch(1, 1)
+        self.rating1 = self.rating_grid.addWidget(QtWidgets.QRadioButton(), 1, 2)
+        self.rating2 = self.rating_grid.addWidget(QtWidgets.QRadioButton(), 1, 3)
+        self.rating3 = self.rating_grid.addWidget(QtWidgets.QRadioButton(), 1, 4)
+        self.rating4 = self.rating_grid.addWidget(QtWidgets.QRadioButton(), 1, 5)
+        self.rating5 = self.rating_grid.addWidget(QtWidgets.QRadioButton(), 1, 6)
+
+        # Label radio buttons
+        self.rating_grid.addWidget(QtWidgets.QLabel(" 1"), 2, 2)
+        self.rating_grid.addWidget(QtWidgets.QLabel(" 5"), 2, 6)
+        self.layout.addLayout(self.rating_grid)
         self.layout.addStretch(1)
+
 
 
 
