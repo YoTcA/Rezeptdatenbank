@@ -5,11 +5,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
-        self.initMe()
 
-    def initMe(self):
         status_bar = self.statusBar()
         status_bar.showMessage("Hello")
+
+        self.setStyleSheet("QLabel {font: 10pt Arial}")
+
+
 
         # Menu File
         # New Recipe
@@ -52,6 +54,10 @@ class MainWindow(QtWidgets.QMainWindow):
         # Additional start up information
         self.setGeometry(50, 50, 500, 500)
         self.setWindowTitle("Rezeptdatenbank V0.1")
+
+        # Textformating
+        self.normal_font = QtGui.QFont("Helvetica", 10)
+
         #self.show()
         '''self.main_window = QtWidgets.QWidget(self)
         self.main_window.setLayout(QtWidgets.QVBoxLayout(self))
@@ -67,7 +73,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
 class MainWidget(QtWidgets.QWidget):
     def __init__(self, parent):
-        super(MainWidget, self).__init__(parent)
+        super().__init__(parent)
+        self.parent = parent
+
         self.layout = QtWidgets.QVBoxLayout(self)
         self.setLayout(self.layout)
 
@@ -75,20 +83,19 @@ class MainWidget(QtWidgets.QWidget):
         top_area = TopWidget(self)
         self.layout.addWidget(top_area)
 
-        # Middle area for portion size and tags
-        mid_area = MidWidget(self)
-        self.layout.addWidget(mid_area)
-
         # Bottom area for ingredients and instructions
         bot_area = BotWidget(self)
         self.layout.addWidget(bot_area)
 
 class TopWidget(QtWidgets.QWidget):
     def __init__(self, parent):
-        super(TopWidget, self).__init__(parent)
+        super().__init__(parent)
+        self.parent = parent
+
         self.layout = QtWidgets.QHBoxLayout(self)
         self.layout.setContentsMargins(0, 0, 0, 0)
         self.setLayout(self.layout)
+
 
         # Add picture area
         top_left = TopLeftPicture(self)
@@ -99,50 +106,222 @@ class TopWidget(QtWidgets.QWidget):
         top_right = TopRightWidget(self)
         self.layout.addWidget(top_right)
 
-
 class TopLeftPicture(QtWidgets.QWidget):
     def __init__(self, parent):
         super(TopLeftPicture, self).__init__(parent)
+        self.parent = parent
+
         self.layout = QtWidgets.QHBoxLayout(self)
         self.setLayout(self.layout)
         picture = QtWidgets.QLabel("Placeholder", self)
         picture.setStyleSheet("background: darkblue")
         self.layout.addWidget(picture)
 
-class TopRightWidget(QtWidgets.QWidget):
+class TopMidWidget(QtWidgets.QWidget):
     def __init__(self, parent):
-        super(TopRightWidget, self).__init__(parent)
+        super(TopMidWidget, self).__init__(parent)
+        self.parent = parent
+
         self.layout = QtWidgets.QVBoxLayout(self)
         self.setLayout(self.layout)
 
-        # Display duration of the recipe
-        duration = DurationWidget(self, "Duration:", "No duration available.")
-        self.layout.setAlignment(QtCore.Qt.AlignCenter)
-        self.layout.addWidget(duration)
 
-        # Display effort of the recipe
-        effort = EffortAndRatingWidget(self)
-        self.layout.addWidget(effort)
+class TopRightWidget(QtWidgets.QWidget):
+    def __init__(self, parent):
+        super(TopRightWidget, self).__init__(parent)
+        self.parent = parent
 
+        self.layout = QtWidgets.QGridLayout(self)
+        self.setLayout(self.layout)
+
+
+        self.tags_width = 55
+
+        # Display tags
+        tags = TagsWidget(self)
+        self.layout.addWidget(tags, 0, 0, 1, 5)
+
+        # Display duration
+        duration = DurationWidget(self)
+        self.layout.addWidget(duration, 1, 0)
+
+        # Display portion size
+        portion = PortionWidget(self)
+        self.layout.addWidget(portion, 1, 1)
+
+        # Display effort estimation
+        effort = EffortWidget(self)
+        self.layout.addWidget(effort, 2, 0)
+
+        #Display rating
+        rating = RatingWidget(self)
+        self.layout.addWidget(rating, 2, 1)
+
+class TagsWidget(QtWidgets.QWidget):
+    def __init__(self, parent):
+        super(TagsWidget, self).__init__(parent)
+        self.parent = parent
+
+        self.layout = QtWidgets.QHBoxLayout(self)
+        self.setLayout(self.layout)
+
+        # Label for Tags
+        tags_label = QtWidgets.QLabel("Tags:",self)
+        tags_label.setAlignment(QtCore.Qt.AlignRight)
+        tags_label.setFixedWidth(parent.tags_width)
+        self.layout.addWidget(tags_label)
+
+        # Area to display tags
+        self.tags_display = QtWidgets.QLabel("No tags available.", self)
+        self.tags_display.setAlignment(QtCore.Qt.AlignLeft)
+        self.layout.addWidget(self.tags_display)
+        self.layout.addStretch(1)
 
 class DurationWidget(QtWidgets.QWidget):
-    def __init__(self, parent, labeltext, lineeditetext):
+    def __init__(self, parent):
         super(DurationWidget, self).__init__(parent)
+        self.parent = parent
+
         self.layout = QtWidgets.QHBoxLayout(self)
         self.setLayout(self.layout)
 
         # Label
-        label = QtWidgets.QLabel(labeltext, self)
-        label.setAlignment(QtCore.Qt.AlignRight)
-        label.setFixedWidth(55)
+        label = QtWidgets.QLabel("Duration:", self)
+        label.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+        label.setFixedWidth(parent.tags_width)
         self.layout.addWidget(label)
 
         # Textbox with Value
-        textbox = QtWidgets.QLineEdit(lineeditetext, self)
-        textbox.setAlignment(QtCore.Qt.AlignLeft)
+        textbox = QtWidgets.QLineEdit("N/A", self)
+        textbox.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
+        textbox.setFixedWidth(25)
         self.layout.addWidget(textbox)
+
+        # Unit label for duration
+        unit = QtWidgets.QLabel("min", self)
+        unit.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
+        self.layout.addWidget(unit)
+
+class PortionWidget(QtWidgets.QWidget):
+    def __init__(self, parent):
+        super(PortionWidget, self).__init__(parent)
+        self.parent = parent
+
+        self.layout = QtWidgets.QHBoxLayout(self)
+        self.setLayout(self.layout)
+
+        # Label for number of portions
+        portions = QtWidgets.QLabel("Portions:", self)
+        portions.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+        portions.setFixedWidth(parent.tags_width)
+        self.layout.addWidget(portions)
+
+        # Choose number of portions
+        portions_select = QtWidgets.QDoubleSpinBox(self)
+        portions_select.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
+        portions_select.setDecimals(1)
+        self.layout.addWidget(portions_select)
+        self.layout.addStretch(1)
+'''
+class DurationAndPortionWidget(QtWidgets.QWidget):
+    def __init__(self, parent):
+        super(DurationAndPortionWidget, self).__init__(parent)
+        self.layout = QtWidgets.QHBoxLayout(self)
+        self.setLayout(self.layout)
+
+        # Label
+        label = QtWidgets.QLabel("Duration:", self)
+        label.setAlignment(QtCore.Qt.AlignRight)
+        label.setFixedWidth(parent.tags_width)
+        self.layout.addWidget(label)
+
+        # Textbox with Value
+        textbox = QtWidgets.QLineEdit("N/A", self)
+        textbox.setAlignment(QtCore.Qt.AlignLeft)
+        textbox.setFixedWidth(25)
+        self.layout.addWidget(textbox)
+
+        # Unit label for duration
+        unit = QtWidgets.QLabel("min",self)
+        unit.setAlignment(QtCore.Qt.AlignLeft)
+        self.layout.addWidget(unit)
+
+        self.layout.addSpacing(50)
+
+        # Label for number of portions
+        portions = QtWidgets.QLabel("Portions:", self)
+        portions.setAlignment(QtCore.Qt.AlignRight)
+        self.layout.addWidget(portions)
+
+        # Choose number of portions
+        portions_select = QtWidgets.QDoubleSpinBox(self)
+        portions_select.setAlignment(QtCore.Qt.AlignLeft)
+        self.layout.addWidget(portions_select)
+        self.layout.addStretch(1)
+'''
+class EffortWidget(QtWidgets.QWidget):
+    def __init__(self, parent):
+        super(EffortWidget, self).__init__(parent)
+        self.parent = parent
+
+        self.layout = QtWidgets.QHBoxLayout(self)
+        self.setLayout(self.layout)
+
+        # Add effort label
+        effort_label = QtWidgets.QLabel("Effort:")
+        effort_label.setAlignment(QtCore.Qt.AlignRight)
+        effort_label.setFixedWidth(parent.tags_width)
+        self.layout.addWidget(effort_label)
+
+        # Add effort rating radio buttons
+        self.effort_grid = QtWidgets.QGridLayout()
+        self.effort_grid.setAlignment(QtCore.Qt.AlignLeft)
+        self.effort_grid.setColumnStretch(1, 1)
+        self.effort_grid.setContentsMargins(0, 0, 0, 0)
+        self.rating1 = self.effort_grid.addWidget(QtWidgets.QRadioButton(), 1, 2)
+        self.rating2 = self.effort_grid.addWidget(QtWidgets.QRadioButton(), 1, 3)
+        self.rating3 = self.effort_grid.addWidget(QtWidgets.QRadioButton(), 1, 4)
+        self.rating4 = self.effort_grid.addWidget(QtWidgets.QRadioButton(), 1, 5)
+        self.rating5 = self.effort_grid.addWidget(QtWidgets.QRadioButton(), 1, 6)
+
+        # Label radio buttons
+        effort_label_low = QtWidgets.QLabel(" 1")
+        self.effort_grid.addWidget(effort_label_low, 2, 2)
+        self.effort_grid.addWidget(QtWidgets.QLabel(" 5"), 2, 6)
+        self.layout.addLayout(self.effort_grid)
         self.layout.addStretch(1)
 
+class RatingWidget(QtWidgets.QWidget):
+    def __init__(self, parent):
+        super(RatingWidget, self).__init__(parent)
+        self.parent = parent
+
+        self.layout = QtWidgets.QHBoxLayout(self)
+        self.setLayout(self.layout)
+
+        # Add rating label
+        self.rating_label = QtWidgets.QLabel("Rating:")
+        self.rating_label.setAlignment(QtCore.Qt.AlignRight)#| QtCore.Qt.AlignVCenter)
+        self.rating_label.setFixedWidth(parent.tags_width)
+        self.layout.addWidget(self.rating_label)
+
+        # Add effort rating radio buttons
+        self.rating_grid = QtWidgets.QGridLayout()
+        self.rating_grid.setAlignment(QtCore.Qt.AlignLeft| QtCore.Qt.AlignVCenter)
+        self.rating_grid.setColumnStretch(1, 1)
+        #self.rating_grid.addWidget(self.rating_label,1,0)
+        self.rating1 = self.rating_grid.addWidget(QtWidgets.QRadioButton(), 1, 2)
+        self.rating2 = self.rating_grid.addWidget(QtWidgets.QRadioButton(), 1, 3)
+        self.rating3 = self.rating_grid.addWidget(QtWidgets.QRadioButton(), 1, 4)
+        self.rating4 = self.rating_grid.addWidget(QtWidgets.QRadioButton(), 1, 5)
+        self.rating5 = self.rating_grid.addWidget(QtWidgets.QRadioButton(), 1, 6)
+
+        # Label radio buttons
+        self.rating_grid.addWidget(QtWidgets.QLabel(" 1"), 2, 2)
+        self.rating_grid.addWidget(QtWidgets.QLabel(" 5"), 2, 6)
+        self.layout.addLayout(self.rating_grid)
+        self.layout.addStretch(1)
+'''
 class EffortAndRatingWidget(QtWidgets.QWidget):
     def __init__(self, parent):
         super(EffortAndRatingWidget, self).__init__(parent)
@@ -152,13 +331,14 @@ class EffortAndRatingWidget(QtWidgets.QWidget):
         # Add effort label
         self.effort_label = QtWidgets.QLabel("Effort:")
         self.effort_label.setAlignment(QtCore.Qt.AlignRight)
-        self.effort_label.setFixedWidth(55)
+        self.effort_label.setFixedWidth(parent.tags_width)
         self.layout.addWidget(self.effort_label)
 
         # Add effort rating radio buttons
         self.effort_grid = QtWidgets.QGridLayout()
         self.effort_grid.setAlignment(QtCore.Qt.AlignLeft)
         self.effort_grid.setColumnStretch(1, 1)
+        self.effort_grid.setContentsMargins(0,0,0,0)
         self.rating1 = self.effort_grid.addWidget(QtWidgets.QRadioButton(), 1, 2)
         self.rating2 = self.effort_grid.addWidget(QtWidgets.QRadioButton(), 1, 3)
         self.rating3 = self.effort_grid.addWidget(QtWidgets.QRadioButton(), 1, 4)
@@ -174,7 +354,7 @@ class EffortAndRatingWidget(QtWidgets.QWidget):
         # Add rating label
         self.rating_label = QtWidgets.QLabel("Rating:")
         self.rating_label.setAlignment(QtCore.Qt.AlignRight)
-        self.rating_label.setFixedWidth(55)
+        self.rating_label.setFixedWidth(parent.tags_width)
         self.layout.addWidget(self.rating_label)
 
         # Add effort rating radio buttons
@@ -192,68 +372,12 @@ class EffortAndRatingWidget(QtWidgets.QWidget):
         self.rating_grid.addWidget(QtWidgets.QLabel(" 5"), 2, 6)
         self.layout.addLayout(self.rating_grid)
         self.layout.addStretch(1)
-
-
-
-
-
-class MidWidget(QtWidgets.QWidget):
-    def __init__(self, parent):
-        super(MidWidget, self).__init__(parent)
-        self.layout = QtWidgets.QHBoxLayout(self)
-        self.layout.setContentsMargins(0, 0, 0, 0)
-        self.setLayout(self.layout)
-
-        # Label for number of portions
-        portions = MidLeftWidget(self)
-        self.layout.addWidget(portions)
-
-        # Label for tags
-        tags_label = MidMidWidget(self)
-        self.layout.addWidget(tags_label)
-
-        # Displayarea for tags
-        tags = MidRightWidget(self)
-        self.layout.addWidget(tags)
-        self.layout.addStretch(1)
-
-class MidLeftWidget(QtWidgets.QWidget):
-    def __init__(self, parent):
-        super(MidLeftWidget, self).__init__(parent)
-        self.layout = QtWidgets.QHBoxLayout(self)
-        self.setLayout(self.layout)
-        # Label for number of portions
-        portions = QtWidgets.QLabel("Portions:", self)
-        self.layout.addWidget(portions)
-
-        # Choose number of portions
-        portions_select = QtWidgets.QDoubleSpinBox(self)
-        self.layout.addWidget(portions_select)
-
-class MidMidWidget(QtWidgets.QWidget):
-    def __init__(self, parent):
-        super(MidMidWidget, self).__init__(parent)
-        self.layout = QtWidgets.QHBoxLayout(self)
-        self.setLayout(self.layout)
-        # Label for tags
-        tags = QtWidgets.QLabel("Tags:", self)
-        self.layout.addWidget(tags)
-
-class MidRightWidget(QtWidgets.QWidget):
-    def __init__(self, parent):
-        super(MidRightWidget, self).__init__(parent)
-        self.layout = QtWidgets.QHBoxLayout(self)
-        self.setLayout(self.layout)
-
-        # Area to display tags
-        tags_display = QtWidgets.QLabel("No tags available.", self)
-        self.layout.addWidget(tags_display)
-
-
-
+'''
 class BotWidget(QtWidgets.QWidget):
     def __init__(self, parent):
         super(BotWidget, self).__init__(parent)
+        self.parent = parent
+
         self.layout = QtWidgets.QHBoxLayout(self)
         self.layout.setContentsMargins(0, 0, 0, 0)
         self.setLayout(self.layout)
@@ -269,6 +393,8 @@ class BotWidget(QtWidgets.QWidget):
 class BotLeftWidget(QtWidgets.QWidget):
     def __init__(self, parent):
         super(BotLeftWidget, self).__init__(parent)
+        self.parent = parent
+
         self.layout = QtWidgets.QVBoxLayout(self)
         self.setLayout(self.layout)
 
@@ -293,6 +419,8 @@ class BotLeftWidget(QtWidgets.QWidget):
 class BotRightWidget(QtWidgets.QWidget):
     def __init__(self, parent):
         super(BotRightWidget, self).__init__(parent)
+        self.parent = parent
+
         self.layout = QtWidgets.QVBoxLayout(self)
         self.setLayout(self.layout)
 
@@ -308,6 +436,8 @@ class BotRightWidget(QtWidgets.QWidget):
 class SearchWidget(QtWidgets.QWidget):
     def __init__(self, parent):
         super(SearchWidget, self).__init__(parent)
+        self.parent = parent
+
         self.layout = QtWidgets.QVBoxLayout(self)
         self.setLayout(self.layout)
         self.layout.addWidget(QtWidgets.QLabel("Test"))
