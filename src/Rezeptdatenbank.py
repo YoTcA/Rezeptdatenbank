@@ -1,98 +1,112 @@
-import tkinter as tk
-import TopBar
-
-import ShowEditRecipe
-import NewRecipe
-import SearchRecipe
+import sys
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Recipedb(tk.Tk):
-    def __init__(self, *args, **kwargs):
-        tk.Tk.__init__(self, *args, **kwargs)
 
-        # define fonts
-        self.LARGE_FONT = ("Helvetica", 12)
-        self.NORMAL_FONT = ("Helvetica", 9)
-        self.SMALL_FONT = ("Helvetica", 8)
-
-        # change all fonts
-        self.option_add("*Font", self.NORMAL_FONT)
-
-        # Adjust Title and Icon
-        tk.Tk.iconbitmap(self, default="auge_ava_50_Q5O_icon.ico")
-        tk.Tk.wm_title(self, "Rezeptdatenbank V 0.1")
-
-        # Initial window size
-        # self.geometry('400x400')
-        # self.wm_minsize(200,200)
-
-        self.pages = dict(StartPage=StartPage, NewRecipe=NewRecipe.NewRecipe, SearchRecipe=SearchRecipe.SearchRecipe,
-                          ShowEditRecipe=ShowEditRecipe.ShowEditRecipe)
-
-        topbar = TopBar.Toolbar(self, self.pages)
-        topbar.pack(side="top", fill=tk.X)
-
-        # Initialize Window
-        container = tk.Frame(self)
-        container.pack(side="top", fill="both", expand=True)
-        container.grid_rowconfigure(0, weight=1)
-        container.grid_columnconfigure(0, weight=1)
-
-        self.frames = {}
-
-        # Load all pages
-        for key, F in self.pages.items():
-            frame = F(container, self, self.pages)
-            self.frames[F] = frame
-            frame.grid(row=0, column=0, sticky="nsew")
-        self.show_frame(StartPage)
-
-    # jump to next selection on Tab instead of indenting the text
-    @staticmethod
-    def focus_next_window(event):
-        event.widget.tk_focusNext().focus()
-        return "break"
-
-    # shows the desired frame
-    def show_frame(self, cont):
-        frame = self.frames[cont]
-        frame.tkraise()
-
-    @staticmethod
-    def double_space(text):
-        while "  " in text:
-            text = text.replace("  ", " ")
-        return text
-
-    def show_recipe(self):
-        frame = self.frames[self.pages["ShowEditRecipe"]]
-        frame.tkraise()
-        fields = [frame.ent_recipe_name, frame.ent_duration, frame.txt_ingredients, frame.txt_preparation]
-        for field in fields:
-            if field.winfo_class() == "Entry":
-                field.config(state="readonly")
-            elif field.winfo_class() == "Text":
-                field.config(state="disabled", bg="#F0F0F0")
-        return True
-
-    def edit_recipe(self):
-        frame = self.frames[self.pages["ShowEditRecipe"]]
-        frame.tkraise()
-        fields = [frame.ent_recipe_name, frame.ent_duration, frame.txt_ingredients, frame.txt_preparation]
-        for field in fields:
-            field.config(state="normal", bg="#FFFFFF")
-        return True
-
-
-class StartPage(tk.Frame):
-    # create the startpage
-    def __init__(self, parent, controller, pages):
+class RecipeDB(QtWidgets.QMainWindow):
+    def __init__(self, parent=None):
         super().__init__(parent)
-        self.parent = parent
-        self.controller = controller
-        label = tk.Label(self, text="Welcome", font=controller.LARGE_FONT)
-        label.pack(pady=10, padx=10)
 
 
-app = Recipedb()
-app.mainloop()
+
+        # Version
+        version = "0.1"
+
+        # Style sheets
+        self.setStyleSheet("QLabel {font: 10pt Arial}")
+
+        # Additional start up information
+        self.setGeometry(50, 50, 500, 500)
+        self.setWindowTitle("Rezeptdatenbank V" + version)
+
+        # Status bar
+        status_bar = self.statusBar()
+        status_bar.showMessage("RecepeDB V" + version)
+
+        # Menu File
+        # New Recipe
+        menu_new = QtWidgets.QAction("&New Recipe", self)
+        menu_new.setShortcut("Ctrl+N")
+        menu_new.setStatusTip("Create New Recipe")
+        ### Funktion einfügen!
+
+        # Open Recipe
+        menu_open = QtWidgets.QAction("&Open Recipe", self)
+        menu_open.setShortcut("Ctrl+O")
+        menu_open.setStatusTip("Open Recipe")
+        ### Funktion einfügen!
+
+        # Save Recipe
+        menu_save = QtWidgets.QAction("&Save", self)
+        menu_save.setShortcut("Ctrl+S")
+        menu_save.setStatusTip("Save Recipe")
+
+        # Save As Recipe
+        menu_save_as = QtWidgets.QAction("Save &As..", self)
+        menu_save_as.setShortcut("Ctrl+Shift+S")
+        menu_save_as.setStatusTip("Save Recipe As..")
+
+        # Exit Programm
+        menu_exit = QtWidgets.QAction("&Exit", self)
+        menu_exit.setShortcut("Ctrl+Q")
+        menu_exit.setStatusTip("Exit Program")
+        menu_exit.triggered.connect(self.close)
+
+        # Build menu bar
+        menu_bar = self.menuBar()
+        menu_file = menu_bar.addMenu("&File")
+        menu_file.addAction(menu_new)
+        menu_file.addAction(menu_open)
+        menu_file.addAction(menu_save)
+        menu_file.addAction(menu_save_as)
+        menu_file.addAction(menu_exit)
+
+        # Load Homescreen
+        self.recipedisplay()
+
+    def recipedisplay(self):
+        self.window1 = Page1(self)
+        self.setCentralWidget(self.window1)
+        self.show()
+
+    def startsecond(self):
+        self.window2 = Page2(self)
+        self.setCentralWidget(self.window2)
+        self.show()
+
+class Page1(QtWidgets.QWidget):
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.agree = QtWidgets.QPushButton("to Page2", self)
+        self.agree.move(180,400)
+        self.agree.clicked.connect(parent.startsecond)
+        self.tabs = QtWidgets.QTabWidget(self)
+        self.tabs.addTab(QtWidgets.QLabel("Hello"), "Tag1")
+        self.tabs.addTab(QtWidgets.QLabel("Hello"), "Tag2")
+
+class Page2(QtWidgets.QWidget):
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.agree2 = QtWidgets.QPushButton("to Page1", self)
+        self.agree2.move(200, 400)
+        self.agree2.clicked.connect(parent.recipedisplay)
+
+
+
+
+def main():
+    app = QtWidgets.QApplication(sys.argv)
+    w = RecipeDB()
+    w.show()
+    sys.exit(app.exec_())
+
+if __name__ == "__main__":
+    main()
+
+'''
+        '''
+
+
+
+
+
