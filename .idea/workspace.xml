@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8009c2c2-0d4c-418e-9861-48d096aa5fc3" name="Default" comment="pause">
+    <list default="true" id="8009c2c2-0d4c-418e-9861-48d096aa5fc3" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Database_Files.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Database_Files.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Rezeptdatenbank.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rezeptdatenbank.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Rezeptdatenbank.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rezeptdatenbank.py" afterDir="false" />
     </list>
     <ignored path="Rezeptdatenbank.iws" />
@@ -24,13 +26,22 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="Rezeptdatenbank.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="Rezeptdatenbank.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Rezeptdatenbank.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="187">
-                  <caret line="93" column="34" selection-start-line="93" selection-start-column="34" selection-end-line="93" selection-end-column="34" />
+                <state relative-caret-position="17">
+                  <caret line="1" column="1" selection-start-line="1" selection-start-column="1" selection-end-line="1" selection-end-column="1" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Database_Files.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/Database_Files.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="561">
+                  <caret line="96" column="36" selection-start-line="96" selection-start-column="36" selection-end-line="96" selection-end-column="64" />
                   <folding>
-                    <element signature="e#0#10#0" expanded="true" />
+                    <element signature="e#0#14#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -39,17 +50,8 @@
           <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/test.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="306">
-                  <caret line="18" selection-start-line="18" selection-end-line="18" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Rezeptdatenbank.db" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/Rezeptdatenbank.db">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="272">
-                  <caret line="16" selection-start-line="16" selection-end-line="16" />
+                <state relative-caret-position="85">
+                  <caret line="5" column="53" lean-forward="true" selection-start-line="5" selection-start-column="53" selection-end-line="5" selection-end-column="53" />
                 </state>
               </provider>
             </entry>
@@ -58,10 +60,10 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="GUI-Test.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="GUI-Test.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/GUI-Test.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="342">
+                <state relative-caret-position="782">
                   <caret line="47" column="26" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="26" />
                   <folding>
                     <element signature="e#0#10#0" expanded="true" />
@@ -73,8 +75,8 @@
           <file leaf-file-name="Rezeptdatenbank_old.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Rezeptdatenbank_old.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="391">
-                  <caret line="28" column="45" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="45" />
+                <state relative-caret-position="527">
+                  <caret line="31" column="15" selection-start-line="31" selection-start-column="15" selection-end-line="31" selection-end-column="15" />
                   <folding>
                     <element signature="e#0#20#0" expanded="true" />
                   </folding>
@@ -97,11 +99,20 @@
           <file leaf-file-name="ShowEditRecipe.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/ShowEditRecipe.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="918">
-                  <caret line="56" column="73" selection-start-line="56" selection-start-column="43" selection-end-line="56" selection-end-column="73" />
+                <state relative-caret-position="112">
+                  <caret line="69" column="21" selection-start-line="69" selection-start-column="21" selection-end-line="69" selection-end-column="21" />
                   <folding>
                     <element signature="e#0#20#0" expanded="true" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="NewRecipe.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/NewRecipe.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="445">
+                  <caret line="178" column="45" selection-start-line="178" selection-start-column="34" selection-end-line="178" selection-end-column="45" />
                 </state>
               </provider>
             </entry>
@@ -133,7 +144,7 @@
           <file leaf-file-name="PyQtTest4.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/test/pyQt-test/PyQtTest4.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="323">
+                <state relative-caret-position="374">
                   <caret line="22" column="42" lean-forward="true" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="42" />
                   <folding>
                     <element signature="e#0#10#0" expanded="true" />
@@ -147,18 +158,6 @@
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="204">
                   <caret line="15" column="23" lean-forward="true" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
-                  <folding>
-                    <element signature="e#0#10#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="PyQtTest2.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/test/pyQt-test/PyQtTest2.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="374">
-                  <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
                   <folding>
                     <element signature="e#0#10#0" expanded="true" />
                   </folding>
@@ -256,7 +255,6 @@
         <option value="$PROJECT_DIR$/src/TopBar.py" />
         <option value="$PROJECT_DIR$/src/ShowEditRecipe.py" />
         <option value="$PROJECT_DIR$/src/SearchRecipe.py" />
-        <option value="$PROJECT_DIR$/src/Database_Files.py" />
         <option value="$PROJECT_DIR$/src/NewRecipe.py" />
         <option value="$PROJECT_DIR$/src/test2.py" />
         <option value="F:/Python_374/Scripts/test_ui.py" />
@@ -269,11 +267,13 @@
         <option value="$PROJECT_DIR$/test/test2/test.py" />
         <option value="$PROJECT_DIR$/src/GUI-Test.py" />
         <option value="$PROJECT_DIR$/src/Rezeptdatenbank.py" />
+        <option value="$PROJECT_DIR$/src/Database_Files.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="608" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
     <option name="width" value="980" />
     <option name="height" value="525" />
   </component>
@@ -383,7 +383,25 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Rezeptdatenbank">
+  <component name="RunManager" selected="Python.Database_Files">
+    <configuration name="Database_Files" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Rezeptdatenbank" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/Database_Files.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <configuration name="GUI-Test" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Rezeptdatenbank" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -397,24 +415,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/GUI-Test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration name="GUI-import" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Rezeptdatenbank" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/GUI-import.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -611,17 +611,17 @@
     <list>
       <item itemvalue="Python.PyQtTest4" />
       <item itemvalue="Python.GUI-Test" />
-      <item itemvalue="Python.GUI-import" />
       <item itemvalue="Python.Rezeptdatenbank" />
       <item itemvalue="Python.test" />
+      <item itemvalue="Python.Database_Files" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Database_Files" />
         <item itemvalue="Python.Rezeptdatenbank" />
         <item itemvalue="Python.GUI-Test" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.PyQtTest4" />
-        <item itemvalue="Python.GUI-import" />
       </list>
     </recent_temporary>
   </component>
@@ -846,23 +846,31 @@
       <option name="project" value="LOCAL" />
       <updated>1567286136473</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="pause">
+      <created>1567544524633</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1567544524633</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22261624" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.08234831" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50236404" side_tool="true" weight="0.33625498" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49763593" weight="0.33625498" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32669324" />
       <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49921197" weight="0.13944224" />
-      <window_info anchor="bottom" id="Python Console" order="8" sideWeight="0.49960598" weight="0.33568075" />
+      <window_info anchor="bottom" id="Python Console" order="8" sideWeight="0.49960598" weight="0.33545816" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49763593" visible="true" weight="0.33625498" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.24973656" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32094595" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39920318" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39920318" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -870,7 +878,6 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32669324" />
     </layout>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -936,20 +943,10 @@
           <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="13" />
+      <option name="time" value="18" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test/pyQt-test/PyQTTEST.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="32" column="24" lean-forward="true" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Rezeptdatenbank_old.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -1057,20 +1054,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/NewRecipe.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2193">
-          <caret line="133" column="42" selection-start-line="133" selection-start-column="42" selection-end-line="133" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Database_Files.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="36" column="16" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/SearchRecipe.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -1115,16 +1098,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ShowEditRecipe.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="56" column="73" selection-start-line="56" selection-start-column="43" selection-end-line="56" selection-end-column="73" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://F:/Python_374/Scripts/test_ui.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -1132,17 +1105,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Rezeptdatenbank.db">
+    <entry file="file://$PROJECT_DIR$/src/TopBar.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="221">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/pyQt-test/PyQtTest4.py">
+    <entry file="file://$PROJECT_DIR$/src/GUI-Test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="22" column="42" lean-forward="true" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="42" />
+        <state relative-caret-position="782">
+          <caret line="47" column="26" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="26" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
@@ -1159,23 +1135,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TopBar.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/test2/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -1186,20 +1145,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Rezeptdatenbank_old.py">
+    <entry file="file://$PROJECT_DIR$/src/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="28" column="45" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="85">
+          <caret line="5" column="53" lean-forward="true" selection-start-line="5" selection-start-column="53" selection-end-line="5" selection-end-column="53" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI-Test.py">
+    <entry file="file://$PROJECT_DIR$/Rezeptdatenbank.db">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/pyQt-test/PyQtTest4.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="47" column="26" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="26" />
+        <state relative-caret-position="374">
+          <caret line="22" column="42" lean-forward="true" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="42" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
@@ -1208,10 +1167,47 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Rezeptdatenbank.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="93" column="34" selection-start-line="93" selection-start-column="34" selection-end-line="93" selection-end-column="34" />
+        <state relative-caret-position="17">
+          <caret line="1" column="1" selection-start-line="1" selection-start-column="1" selection-end-line="1" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rezeptdatenbank.db">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rezeptdatenbank_old.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="31" column="15" selection-start-line="31" selection-start-column="15" selection-end-line="31" selection-end-column="15" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ShowEditRecipe.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="69" column="21" selection-start-line="69" selection-start-column="21" selection-end-line="69" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NewRecipe.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="445">
+          <caret line="178" column="45" selection-start-line="178" selection-start-column="34" selection-end-line="178" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Database_Files.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="96" column="36" selection-start-line="96" selection-start-column="36" selection-end-line="96" selection-end-column="64" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -1,26 +1,105 @@
 import sqlite3
+from pathlib import Path
 
-# connect to database Rezeptdatenbank.db
-connection = sqlite3.connect("Rezeptdatenbank.db")
-cursor = connection.cursor()
-cursor.execute("""CREATE TABLE IF NOT EXISTS recipe (
-            recipename TEXT COLLATE NOCASE,
-             duration INTEGER,
-              preparation TEXT)""")
-cursor.execute("""CREATE TABLE IF NOT EXISTS ingredients (
-            recipename TEXT COLLATE NOCASE,
-             quantity REAL,
-              unit TEXT,
-               ingredient TEXT COLLATE NOCASE)""")
-connection.commit()
 
-def readall():
+
+def create_connection(db_file):
+    # Create a database connection to a SQLite database
+    conn = None
+    try:
+        conn = sqlite3.connect(db_file)
+        print("SQliteversion: " + sqlite3.version)
+        cur = conn.cursor()
+    except sqlite3.Error as e:
+        print(e)
+    else:
+        cur.execute("""CREATE TABLE IF NOT EXISTS recipes (
+                            recipe_name TEXT COLLATE NOCASE,
+                            duration INTEGER,
+                            portions INTEGER,
+                            effort INTEGER,
+                            rating INTEGER,
+                            instructions TEXT,
+                            CONSTRAINT recipe_name_unique UNIQUE (recipe_name))
+                            """)
+        cur.execute("""CREATE TABLE IF NOT EXISTS ingredients (
+                            recipe_name TEXT COLLATE NOCASE,                    
+                            quantity REAL,
+                            unit TEXT,
+                            ingredient TEXT COLLATE NOCASE)
+                            """)
+        conn.commit()
+    finally:
+        if conn:
+            conn.close()
+
+def readall_recipes(db_file):
     # read all data from database
-    for row in cursor.execute('SELECT * FROM ingredients'):
-        print(row)
-    for row in cursor.execute('SELECT * FROM recipe'):
-        print(row)
+    try:
+        conn = sqlite3.connect(db_file)
+        cur = conn.cursor()
+    except sqlite3.Error as e:
+        print(e)
+    else:
+        for row in cur.execute('SELECT * FROM recipes'):
+            print(row)
 
+def readall_ingredients(db_file):
+    # read all data from database
+    try:
+        conn = sqlite3.connect(db_file)
+        cur = conn.cursor()
+    except sqlite3.Error as e:
+        print(e)
+    else:
+        for row in cur.execute('SELECT * FROM ingredients'):
+            print(row)
+
+def add_recipe(db_file, recipe, ingredients):
+    # input: (recipe_name, duration, portions, effort, rating, instructions)
+    try:
+        conn = sqlite3.connect(db_file)
+        cur = conn.cursor()
+        sql = "INSERT INTO recipes (recipe_name, duration, portions, effort, rating, instructions) VALUES(?,?,?,?,?,?)"
+        cur.execute(sql, recipe)
+    except sqlite3.Error as e:
+        print(e)
+    else:
+        try:
+            sql = "INSERT INTO ingredients (recipe_name, quantity, unit, ingredient) VALUES(?,?,?,?)"
+            cur.execute(sql, ingredients)
+        except sqlite3.Error as e:
+            print(e)
+        else:
+            conn.commit()
+    finally:
+        if conn:
+            conn.close()
+
+def add_ingredients(db_file, value):
+    try:
+        conn = sqlite3.connect(db_file)
+        cur = conn.cursor()
+    except sqlite3.Error as e:
+        print(e)
+    else:
+        sql = "INSERT INTO ingredients (recipe_name, quantity, unit, ingredient) VALUES(?,?,?,?)"
+        cur.execute(sql, value)
+        conn.commit()
+    finally:
+        if conn:
+            conn.close()
+
+create_connection("Rezeptdatenbank.db")
+readall_recipes("Rezeptdatenbank.db")
+readall_ingredients("Rezeptdatenbank.db")
+add_recipe("Rezeptdatenbank.db", ["Test", 10, 2, 3, 4, "Test3"], ["Test", 1, "TL", "Milch"])
+
+
+
+
+
+'''
 def write_data(preparation_list, ingredient_list):
     # write input to database
     for i in range(len(ingredient_list[3])):
@@ -92,3 +171,4 @@ def get_ingredients(recipe_name):
             ingredient = ingredient + str(item) + "\t"
         result.append(ingredient.rstrip("\t"))
     return result
+'''
