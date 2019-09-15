@@ -1,5 +1,5 @@
 import sys
-#import Database_Files
+import Database_Files
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
@@ -157,6 +157,12 @@ class SearchRecipe(QtWidgets.QWidget):
         self.recipes = QtWidgets.QTableWidget(self)
         layout.addWidget(self.recipes)
 
+    '''def load_all_recepies(self):
+        result = Database_Files.readall_recipes("Rezeptdatenbank.db")
+        print(result)
+
+    load_all_recepies'''
+
 
 class NewRecipe(QtWidgets.QWidget):
     def __init__(self, parent):
@@ -164,7 +170,7 @@ class NewRecipe(QtWidgets.QWidget):
         self.layout = QtWidgets.QVBoxLayout(self)
         self.setLayout(self.layout)
         # Set the width of the labels in the layout
-        self.label_width = 55
+        self.label_width = 90
 
         # Top area for picture, effort, duration and rating
         self.top_area = QtWidgets.QWidget(self)
@@ -183,13 +189,16 @@ class NewRecipe(QtWidgets.QWidget):
         self.info_area.setLayout(self.info_area_layout)
         self.top_area_layout.addWidget(self.info_area)
 
-
         # Left side of the info area
         self.info_left_area = QtWidgets.QWidget(self)
         self.info_left_area_layout = QtWidgets.QVBoxLayout(self)
         self.info_left_area.setLayout(self.info_left_area_layout)
 
-        # Display Duration
+        # Display recipe name
+        recipe_name = RecipeNameWidget(self)
+        self.info_left_area_layout.addWidget(recipe_name)
+
+        # Display duration
         duration = DurationWidget(self)
         self.info_left_area_layout.addWidget(duration)
 
@@ -204,6 +213,10 @@ class NewRecipe(QtWidgets.QWidget):
         self.info_right_area = QtWidgets.QWidget(self)
         self.info_right_area_layout = QtWidgets.QVBoxLayout(self)
         self.info_right_area.setLayout(self.info_right_area_layout)
+
+        # Display tags
+        tags = TagsWidget(self)
+        self.info_right_area_layout.addWidget(tags)
 
         # Display portion size
         portion = PortionWidget(self)
@@ -229,8 +242,23 @@ class NewRecipe(QtWidgets.QWidget):
         recipe = RecipeWidget(self)
         self.bot_area_layout.addWidget(recipe, 1)
 
+        # Area for buttons
+        self.button_area = QtWidgets.QWidget(self)
+        self.button_area_layout = QtWidgets.QHBoxLayout(self)
+        self.button_area.setLayout(self.button_area_layout)
+
+        # Save button
+        self.save_button = QtWidgets.QPushButton("Save", self)
+        self.button_area_layout.addWidget(self.save_button)
+
+        # Clear button
+        self.clear_button = QtWidgets.QPushButton("Clear", self)
+        self.button_area_layout.addWidget(self.clear_button)
+
         self.layout.addWidget(self.top_area)
         self.layout.addWidget(self.bot_area)
+        self.layout.addWidget(self.button_area)
+
 
 
 class TagsWidget(QtWidgets.QWidget):
@@ -243,16 +271,33 @@ class TagsWidget(QtWidgets.QWidget):
 
         # Label for Tags
         tags_label = QtWidgets.QLabel("Tags:",self)
-        tags_label.setAlignment(QtCore.Qt.AlignRight)
-        tags_label.setFixedWidth(parent.tags_width)
+        tags_label.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+        tags_label.setFixedWidth(parent.label_width)
         self.layout.addWidget(tags_label)
 
         # Area to display tags
-        self.tags_display = QtWidgets.QLabel("No tags available.", self)
-        self.tags_display.setAlignment(QtCore.Qt.AlignLeft)
+        self.tags_display = QtWidgets.QLineEdit(self)
+        self.tags_display.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
         self.layout.addWidget(self.tags_display)
-        self.layout.addStretch(1)
 
+class RecipeNameWidget(QtWidgets.QWidget):
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.parent = parent
+
+        self.layout = QtWidgets.QHBoxLayout(self)
+        self.setLayout(self.layout)
+
+        # Label for Tags
+        recipe_name_label = QtWidgets.QLabel("Recipe Name:",self)
+        recipe_name_label.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+        recipe_name_label.setFixedWidth(parent.label_width)
+        self.layout.addWidget(recipe_name_label)
+
+        # Area to display tags
+        self.recipe_name_display = QtWidgets.QLineEdit(self)
+        self.recipe_name_display.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
+        self.layout.addWidget(self.recipe_name_display)
 
 class DurationWidget(QtWidgets.QWidget):
     def __init__(self, parent):
@@ -389,7 +434,7 @@ class IngredientsWidget(QtWidgets.QWidget):
 
         # Area to display ingredients
         self.ingredients_table = QtWidgets.QTableWidget(self)
-        self.ingredients_table.setRowCount(1)
+        self.ingredients_table.setRowCount(50)
         self.ingredients_table.setColumnCount(3)
         self.ingredients_table.verticalHeader().hide()
         self.ingredients_table.horizontalHeader().hide()

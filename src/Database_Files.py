@@ -1,5 +1,6 @@
 import sqlite3
 from pathlib import Path
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 
@@ -52,11 +53,15 @@ def readall_ingredients(db_file):
     except sqlite3.Error as e:
         print(e)
     else:
+        result = []
         for row in cur.execute('SELECT * FROM ingredients'):
+            result.append(row)
             print(row)
+        return result
 
 def add_recipe(db_file, recipe, ingredients):
     # input: (recipe_name, duration, portions, effort, rating, instructions)
+    conn = None
     try:
         conn = sqlite3.connect(db_file)
         cur = conn.cursor()
@@ -64,6 +69,13 @@ def add_recipe(db_file, recipe, ingredients):
         cur.execute(sql, recipe)
     except sqlite3.Error as e:
         print(e)
+        if str(e) == "UNIQUE constraint failed: recipes.recipe_name":
+            #error_dialog = QtWidgets.QErrorMessage()
+            #error_dialog.showMessage("Recipe name already in use. Please pick another.")
+            #error_dialog.exec_()
+            print("yes")
+        else:
+            print("no")
     else:
         try:
             sql = "INSERT INTO ingredients (recipe_name, quantity, unit, ingredient) VALUES(?,?,?,?)"
@@ -76,24 +88,11 @@ def add_recipe(db_file, recipe, ingredients):
         if conn:
             conn.close()
 
-def add_ingredients(db_file, value):
-    try:
-        conn = sqlite3.connect(db_file)
-        cur = conn.cursor()
-    except sqlite3.Error as e:
-        print(e)
-    else:
-        sql = "INSERT INTO ingredients (recipe_name, quantity, unit, ingredient) VALUES(?,?,?,?)"
-        cur.execute(sql, value)
-        conn.commit()
-    finally:
-        if conn:
-            conn.close()
 
-create_connection("Rezeptdatenbank.db")
-readall_recipes("Rezeptdatenbank.db")
-readall_ingredients("Rezeptdatenbank.db")
-add_recipe("Rezeptdatenbank.db", ["Test", 10, 2, 3, 4, "Test3"], ["Test", 1, "TL", "Milch"])
+#create_connection("Rezeptdatenbank.db")
+#readall_recipes("Rezeptdatenbank.db")
+#readall_ingredients("Rezeptdatenbank.db")
+#add_recipe("Rezeptdatenbank.db", ["Test", 10, 2, 3, 4, "Test3"], ["Test", 1, "TL", "Milch"])
 
 
 
