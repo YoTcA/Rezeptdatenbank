@@ -1,125 +1,101 @@
-import tkinter as tk
-from tkinter import ttk
-from tkinter import messagebox
-import Database_Files
-import re
-import ShowEditRecipe
+import sys
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+class SearchRecipe(QtWidgets.QWidget):
+    def __init__(self, parent):
+        super().__init__(parent)
+
+        # Define main vertical layout
+        layout = QtWidgets.QVBoxLayout(self)
+        self.setLayout(layout)
+
+        # Search area
+        self.search_area = QtWidgets.QWidget(self)
+        search_area_layout = QtWidgets.QHBoxLayout(self)
+        self.search_area.setLayout(search_area_layout)
+        search_label = QtWidgets.QLabel("Search:", self)
+        search_area_layout.addWidget(search_label)
+        self.search_input = QtWidgets.QLineEdit(self)
+        search_area_layout.addWidget(self.search_input)
+        self.search_button = QtWidgets.QPushButton("Search", self)
+        search_area_layout.addWidget(self.search_button)
+        layout.addWidget(self.search_area)
+
+        # Effort and rating area
+        self.effort_rating_area = QtWidgets.QWidget(self)
+        self.effort_rating_area_layout = QtWidgets.QHBoxLayout(self)
+        self.effort_rating_area.setLayout(self.effort_rating_area_layout)
+        layout.addWidget(self.effort_rating_area)
+        self.checkbox_spacing = 30
+
+        # Effort area
+        self.effort_area = QtWidgets.QWidget(self)
+        effort_area_layout = QtWidgets.QHBoxLayout(self)
+        self.effort_area.setLayout(effort_area_layout)
+        # Effort label
+        effort_label = QtWidgets.QLabel("Effort:", self)
+        effort_label.setAlignment(QtCore.Qt.AlignTop)
+        effort_area_layout.addWidget(effort_label)
+        # Effort select
+        self.effort_grid = QtWidgets.QGridLayout(self)
+        self.effort1 = QtWidgets.QCheckBox(self)
+        self.effort1.setChecked(1)
+        self.effort2 = QtWidgets.QCheckBox(self)
+        self.effort2.setChecked(1)
+        self.effort3 = QtWidgets.QCheckBox(self)
+        self.effort3.setChecked(1)
+        self.effort_grid.addWidget(self.effort1, 0, 0)
+        self.effort_grid.addWidget(self.effort2, 0, 1)
+        self.effort_grid.addWidget(self.effort3, 0, 2)
+        for i in range(3):
+            self.effort_grid.setColumnMinimumWidth(i, self.checkbox_spacing)
+        self.effort_grid.addWidget(QtWidgets.QLabel("Low"), 1, 0)
+        self.effort_grid.addWidget(QtWidgets.QLabel("High"), 1, 2)
+        effort_area_layout.addLayout(self.effort_grid)
+        self.effort_rating_area_layout.addWidget(self.effort_area)
 
 
-def openrecipe():
-    print(SearchRecipe.get_active)
+        # Rating area
+        self.rating_area = QtWidgets.QWidget(self)
+        rating_area_layout = QtWidgets.QHBoxLayout(self)
+        self.rating_area.setLayout(rating_area_layout)
+        # Rating label
+        rating_label = QtWidgets.QLabel("Rating:", self)
+        rating_label.setAlignment(QtCore.Qt.AlignTop)
+        rating_area_layout.addWidget(rating_label)
+        # Rating select
+        self.rating_grid = QtWidgets.QGridLayout(self)
+        self.rating1 = QtWidgets.QCheckBox(self)
+        self.rating1.setChecked(1)
+        self.rating2 = QtWidgets.QCheckBox(self)
+        self.rating2.setChecked(1)
+        self.rating3 = QtWidgets.QCheckBox(self)
+        self.rating3.setChecked(1)
+        self.rating4 = QtWidgets.QCheckBox(self)
+        self.rating4.setChecked(1)
+        self.rating5 = QtWidgets.QCheckBox(self)
+        self.rating5.setChecked(1)
+        self.rating_grid.addWidget(self.rating1, 0, 0)
+        self.rating_grid.addWidget(self.rating2, 0, 1)
+        self.rating_grid.addWidget(self.rating3, 0, 2)
+        self.rating_grid.addWidget(self.rating4, 0, 3)
+        self.rating_grid.addWidget(self.rating5, 0, 4)
+        for i in range(5):
+            self.rating_grid.setColumnMinimumWidth(i, self.checkbox_spacing)
+        self.rating_grid.addWidget(QtWidgets.QLabel("1"), 1, 0)
+        self.rating_grid.addWidget(QtWidgets.QLabel("5"), 1, 4)
+        rating_area_layout.addLayout(self.rating_grid)
+        self.effort_rating_area_layout.addWidget(self.rating_area)
+        self.effort_rating_area_layout.addStretch(1)
 
+        self.recipes = QtWidgets.QTableWidget(self)
+        layout.addWidget(self.recipes)
 
+    '''def load_all_recepies(self):
+        result = Database_Files.readall_recipes("Rezeptdatenbank.db")
+        print(result)
 
-class SearchRecipe(tk.Frame):
-    def get_active(self):
-        return self.lbx_recipelist.get(tk.ACTIVE)[0]
-
-    def __init__(self, parent, controller, pages):
-        tk.Frame.__init__(self, parent)
-        self.parent = parent
-        self.controller = controller
-        self.pages = pages
-
-        # GUI-Elemente erstellen
-        self.lbl_recipe_name = tk.Label(self, text="Rezeptname:")
-        self.lbl_ingredients = tk.Label(self, text="Zutaten:\n (Bitte Einzahl\nverwenden)", justify=tk.RIGHT)
-        self.lbl_result_list = tk.Label(self, text="Ergebnisse:")
-        self.ent_recipe_name = tk.Entry(self)
-        self.txt_ingredients = tk.Text(self, width=40, height=4)
-        self.txt_ingredients.bind("<Tab>", controller.focus_next_window)
-        self.lbx_recipelist = tk.Listbox(self, selectmode=tk.SINGLE)
-        # Frame for Buttons
-        self.frame_buttons = tk.Frame(self)
-        # Buttons
-        self.but_search = ttk.Button(self.frame_buttons, text="Suchen", width=12,
-                                     command=lambda: self.search_recipes(self.ent_recipe_name.get(), self.txt_ingredients.get("1.0", "end-1c")))
-        self.but_open = ttk.Button(self.frame_buttons, text="Anzeigen", width=12,
-                                   command=lambda: self.open_recipe(""))#open_recipe(self.lbx_recipelist.get(tk.ACTIVE)[0]))
-        # GUI-Elemente positionieren
-        self.lbl_recipe_name.grid(row=0, column=0, sticky=tk.E)
-        self.ent_recipe_name.grid(row=0, column=1, sticky=tk.NSEW)
-
-        self.lbl_ingredients.grid(row=2, column=0, sticky=tk.E)
-        self.txt_ingredients.grid(row=2, column=1, sticky=tk.W)
-        self.lbl_result_list.grid(row=3, column=0, sticky=tk.E)
-        self.lbx_recipelist.grid(row=3, column=1, sticky=tk.NSEW)
-        # get the grid size, to always pack the buttons on the buttom
-        column, row = self.grid_size()
-
-        self.frame_buttons.grid(row=row, column=0, columnspan=column+2, sticky=tk.EW)
-        self.but_search.grid(row=0, column=0, padx=2, pady=2, sticky=tk.EW)
-        self.but_open.grid(row=0, column=1, padx=2, pady=2, sticky=tk.EW)
-        # get the grid size, to always pack the buttons on the buttom
-        column, row = self.frame_buttons.grid_size()
-        for i in range(column):
-            self.frame_buttons.columnconfigure(i, weight=1)
-
-    def search_recipes(self, recipe_name, ingredients):
-        results = []
-        # execute if a recipe_name is given
-        print(recipe_name)
-        if recipe_name:
-            for row in Database_Files.search_recipe_name((recipe_name)):
-                results.append(row)
-
-        # divide the ingredients into single items
-        ingredient_result = []
-        if len(ingredients) > 0:
-            rows = ingredients.splitlines()
-            for row in rows:
-                ingredient_result.append(re.split('\W+\s', row))
-        ingredient_result = [item for sublist in ingredient_result for item in sublist]
-        print(ingredient_result)
-
-        # execute when ingredient_result is not empty
-        '''if ingredient_result:
-            results.append(database_files.search_ingredients(ingredient_result))'''
-
-        if ingredient_result:
-            for row in Database_Files.search_ingredients(ingredient_result):
-                results.append(row)
-        # empty the listbox before adding new items
-        self.lbx_recipelist.delete(0, tk.END)
-
-        # eliminate double entries in results and add the unique values to the listbox
-        for result in list(set(results)):
-            self.lbx_recipelist.insert(0, str(result))
-        return True
-
-    def open_recipe(self, recipe_name):
-        if not recipe_name:
-            selection = self.lbx_recipelist.curselection()
-            if selection:
-                recipe_name = self.lbx_recipelist.get(selection)
-            else:
-                messagebox.showinfo("Kein Rezept Ausgewählt", "Bitte ein Rezept aus der Liste auswählen.")
-        target = self.controller.frames[self.pages["ShowEditRecipe"]]
-
-        if recipe_name:
-            # read the values from the database
-            duration = Database_Files.get_duration(recipe_name)
-            ingredients = Database_Files.get_ingredients(recipe_name)
-            # convert the database result to a line formated text
-            ingredient_list = "\n".join(ingredients)
-            preparation = Database_Files.get_preparation(recipe_name)
-            print("ingredientresult: " + repr(ingredient_list))
-            values = [recipe_name, duration, ingredient_list, preparation]
-            fields = [target.ent_recipe_name, target.ent_duration, target.txt_ingredients, target.txt_preparation]
-            for field, value in zip(fields, values):
-                if field.winfo_class() == "Entry":
-                    field.config(state="normal")
-                    field.delete(0, tk.END)
-                    field.insert(tk.END, value)
-                    field.config(state="readonly")
-                elif field.winfo_class() == "Text":
-                    field.config(state="normal")
-                    field.delete('1.0', tk.END)
-                    field.insert(tk.END, value)
-                    field.config(state="disabled")
-            self.controller.show_recipe()
-
-        return True
+    load_all_recepies'''
 
 if __name__ == "__main__":
     import Rezeptdatenbank

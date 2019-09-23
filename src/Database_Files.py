@@ -16,6 +16,7 @@ def create_connection(db_file):
     else:
         cur.execute("""CREATE TABLE IF NOT EXISTS recipes (
                             recipe_name TEXT COLLATE NOCASE,
+                            tags TEXT,
                             duration INTEGER,
                             portions INTEGER,
                             effort INTEGER,
@@ -59,13 +60,14 @@ def readall_ingredients(db_file):
             print(row)
         return result
 
-def add_recipe(db_file, recipe, ingredients):
+def add_recipe(db_file, recipe_name, tags, duration, portions, effort, rating, instructions):
     # input: (recipe_name, duration, portions, effort, rating, instructions)
     conn = None
+    recipe = [recipe_name, tags, duration, portions, effort, rating, instructions]
     try:
         conn = sqlite3.connect(db_file)
         cur = conn.cursor()
-        sql = "INSERT INTO recipes (recipe_name, duration, portions, effort, rating, instructions) VALUES(?,?,?,?,?,?)"
+        sql = "INSERT INTO recipes (recipe_name, tags, duration, portions, effort, rating, instructions) VALUES(?,?,?,?,?,?,?)"
         cur.execute(sql, recipe)
     except sqlite3.Error as e:
         print(e)
@@ -77,13 +79,23 @@ def add_recipe(db_file, recipe, ingredients):
         else:
             print("no")
     else:
-        try:
-            sql = "INSERT INTO ingredients (recipe_name, quantity, unit, ingredient) VALUES(?,?,?,?)"
-            cur.execute(sql, ingredients)
-        except sqlite3.Error as e:
-            print(e)
-        else:
-            conn.commit()
+        conn.commit()
+    finally:
+        if conn:
+            conn.close()
+
+def add_ingredients(db_file, recipe_name, quantity, unit, ingredient):
+    conn = None
+    ingredients = [recipe_name, quantity, unit, ingredient]
+    try:
+        conn = sqlite3.connect(db_file)
+        cur = conn.cursor()
+        sql = "INSERT INTO ingredients (recipe_name, quantity, unit, ingredient) VALUES(?,?,?,?)"
+        cur.execute(sql, ingredients)
+    except sqlite3.Error as e:
+        print(e)
+    else:
+        conn.commit()
     finally:
         if conn:
             conn.close()
