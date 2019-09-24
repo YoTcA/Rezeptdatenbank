@@ -3,12 +3,11 @@ from pathlib import Path
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-
-def create_connection(db_file):
+def create_table():
     # Create a database connection to a SQLite database
     conn = None
     try:
-        conn = sqlite3.connect(db_file)
+        conn = sqlite3.connect("Rezeptdatenbank.db")
         print("SQliteversion: " + sqlite3.version)
         cur = conn.cursor()
     except sqlite3.Error as e:
@@ -35,10 +34,10 @@ def create_connection(db_file):
         if conn:
             conn.close()
 
-def readall_recipes(db_file):
+def readall_recipes():
     # read all data from database
     try:
-        conn = sqlite3.connect(db_file)
+        conn = sqlite3.connect("Rezeptdatenbank.db")
         cur = conn.cursor()
     except sqlite3.Error as e:
         print(e)
@@ -46,10 +45,10 @@ def readall_recipes(db_file):
         for row in cur.execute('SELECT * FROM recipes'):
             print(row)
 
-def readall_ingredients(db_file):
+def readall_ingredients():
     # read all data from database
     try:
-        conn = sqlite3.connect(db_file)
+        conn = sqlite3.connect("Rezeptdatenbank.db")
         cur = conn.cursor()
     except sqlite3.Error as e:
         print(e)
@@ -60,12 +59,12 @@ def readall_ingredients(db_file):
             print(row)
         return result
 
-def add_recipe(db_file, recipe_name, tags, duration, portions, effort, rating, instructions):
+def add_recipe(recipe_name, tags, duration, portions, effort, rating, instructions):
     # input: (recipe_name, duration, portions, effort, rating, instructions)
     conn = None
     recipe = [recipe_name, tags, duration, portions, effort, rating, instructions]
     try:
-        conn = sqlite3.connect(db_file)
+        conn = sqlite3.connect("Rezeptdatenbank.db")
         cur = conn.cursor()
         sql = "INSERT INTO recipes (recipe_name, tags, duration, portions, effort, rating, instructions) VALUES(?,?,?,?,?,?,?)"
         cur.execute(sql, recipe)
@@ -84,11 +83,11 @@ def add_recipe(db_file, recipe_name, tags, duration, portions, effort, rating, i
         if conn:
             conn.close()
 
-def add_ingredients(db_file, recipe_name, quantity, unit, ingredient):
+def add_ingredients(recipe_name, quantity, unit, ingredient):
     conn = None
     ingredients = [recipe_name, quantity, unit, ingredient]
     try:
-        conn = sqlite3.connect(db_file)
+        conn = sqlite3.connect("Rezeptdatenbank.db")
         cur = conn.cursor()
         sql = "INSERT INTO ingredients (recipe_name, quantity, unit, ingredient) VALUES(?,?,?,?)"
         cur.execute(sql, ingredients)

@@ -8,12 +8,12 @@ import Functions
 
 
 class NewRecipe(QtWidgets.QWidget):
+    # Set the width of the labels in the layout
+    label_width = 90
     def __init__(self, parent):
         super().__init__(parent)
         self.layout = QtWidgets.QVBoxLayout(self)
         self.setLayout(self.layout)
-        # Set the width of the labels in the layout
-        self.label_width = 90
 
         # Top area for picture, effort, duration and rating
         self.top_area = QtWidgets.QWidget(self)
@@ -104,33 +104,61 @@ class NewRecipe(QtWidgets.QWidget):
         self.layout.addWidget(self.button_area)
 
     def save_recipe(self):
-        recipe_name = self.recipe_name.recipe_name_input.text()
-        tags = self.tags.tags_input.text()
-        duration = self.duration.duration_input.text()
-        portions = self.portion.portions_select.value()
+        try:
+            str(self.recipe_name.recipe_name_input.text())
+        except:
+            print("Recipe name cannot be converted to string")
+            recipe_name = "N/A"
+        else:
+            recipe_name = str(self.recipe_name.recipe_name_input.text())
+
+        try:
+            str(self.tags.tags_input.text())
+        except:
+            print("Tags cannot be converted to string")
+            tags = "N/A"
+        else:
+            tags = str(self.tags.tags_input.text())
+
+        try:
+            int(self.duration.duration_input.text())
+        except:
+            print("Duration is not an int")
+            duration: int = 99
+        else:
+            duration = int(self.duration.duration_input.text())
+
+        try:
+            int(self.portion.portions_select.value())
+        except:
+            print("Portions not an int")
+            portions: int = 99
+        else:
+            portions = int(self.portion.portions_select.value())
+
         if self.effort.low_effort.isChecked():
-            effort = 0
+            effort: int = 0
         elif self.effort.mid_effort.isChecked():
-            effort = 1
+            effort: int = 1
         elif self.effort.high_effort.isChecked():
-            effort = 2
+            effort: int = 2
         else:
             print("no effort selected")
-            effort = 99
-        rating = 0
+            effort: int = 99
+
         if self.rating.rating1.isChecked():
-            rating = 1
+            rating: int = 1
         elif self.rating.rating2.isChecked():
-            rating = 2
+            rating: int = 2
         elif self.rating.rating3.isChecked():
-            rating = 3
+            rating: int = 3
         elif self.rating.rating4.isChecked():
-            rating = 4
+            rating: int = 4
         elif self.rating.rating5.isChecked():
-            rating = 5
+            rating: int = 5
         else:
             print("nof rating selected")
-            rating = 99
+            rating: int = 99
 
 
         instructions = self.instructions.instructions_text.toPlainText()
@@ -145,7 +173,7 @@ class NewRecipe(QtWidgets.QWidget):
 
         ### Datenformat muss noch für die Datenbank aufbereitet werden!
 
-        #Database_Files.add_recipe("Rezeptdatenbank.db",recipe_name, duration, portions, effort, rating, instructions)
+        Database_Files.add_recipe(recipe_name, tags, duration, portions, effort, rating, instructions)
 
 
 
@@ -204,7 +232,7 @@ class DurationWidget(QtWidgets.QWidget):
         self.layout.addWidget(duration_label)
 
         # Textbox with Value
-        self.duration_input = QtWidgets.QLineEdit("N/A", self)
+        self.duration_input = QtWidgets.QLineEdit(self)
         self.duration_input.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
         self.duration_input.setFixedWidth(25)
         self.layout.addWidget(self.duration_input)
@@ -235,6 +263,7 @@ class EffortWidget(QtWidgets.QWidget):
         self.effort_grid.setContentsMargins(0, 0, 0, 0)
         self.low_effort = QtWidgets.QRadioButton(self)
         self.mid_effort = QtWidgets.QRadioButton(self)
+        self.mid_effort.setChecked(True)
         self.high_effort = QtWidgets.QRadioButton(self)
         self.effort_grid.addWidget(self.low_effort, 0, 0)
         self.effort_grid.addWidget(self.mid_effort, 0 ,1)
@@ -293,6 +322,7 @@ class RatingWidget(QtWidgets.QWidget):
         self.rating1 = QtWidgets.QRadioButton()
         self.rating2 = QtWidgets.QRadioButton()
         self.rating3 = QtWidgets.QRadioButton()
+        self.rating3.setChecked(True)
         self.rating4 = QtWidgets.QRadioButton()
         self.rating5 = QtWidgets.QRadioButton()
         self.rating_grid.addWidget(self.rating1, 0, 0)

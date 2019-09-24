@@ -77,7 +77,9 @@ def main():
     app = QtWidgets.QApplication(sys.argv)
     w = RecipeDB()
     w.show()
+    Database_Files.create_table()
     sys.exit(app.exec_())
+
 
 if __name__ == "__main__":
     main()
