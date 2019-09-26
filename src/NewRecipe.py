@@ -383,4 +383,4 @@ class InstructionsWidget(QtWidgets.QWidget):
         self.layout.addWidget(self.instructions_text)
 
 if __name__ == "__main__":
-    import Rezeptdatenbank
+    import Rezeptdatenbankk
