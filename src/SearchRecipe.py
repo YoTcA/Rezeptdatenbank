@@ -90,11 +90,18 @@ class SearchRecipe(QtWidgets.QWidget):
         self.effort_rating_area_layout.addStretch(1)
 
         self.recipes = QtWidgets.QTableWidget(self)
+        self.recipes.setColumnCount(6)
         layout.addWidget(self.recipes)
         self.load_all_recepies()
 
     def load_all_recepies(self):
         result = Database_Files.readall_recipes()
+        print(len(result))
+        self.recipes.setRowCount(len(result))
+        for row in result:
+            #self.recipes.setItem(0,1, )
+            print(row)
+
 
 
 

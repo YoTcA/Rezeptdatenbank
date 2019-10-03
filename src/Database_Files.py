@@ -42,8 +42,10 @@ def readall_recipes():
     except sqlite3.Error as e:
         print(e)
     else:
+        result = []
         for row in cur.execute('SELECT * FROM recipes'):
-            print(row)
+            result.append(row)
+        return result
 
 def readall_ingredients():
     # read all data from database
