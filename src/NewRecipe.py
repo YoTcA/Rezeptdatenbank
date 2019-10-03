@@ -39,6 +39,7 @@ class NewRecipe(QtWidgets.QWidget):
 
         # Display recipe name
         self.recipe_name = RecipeNameWidget(self)
+        self.recipe_name.recipe_name_input.editingFinished.connect(self.recipe_name_check)
         self.info_left_area_layout.addWidget(self.recipe_name)
 
         # Display duration
@@ -174,6 +175,12 @@ class NewRecipe(QtWidgets.QWidget):
         ### Datenformat muss noch für die Datenbank aufbereitet werden!
 
         Database_Files.add_recipe(recipe_name, tags, duration, portions, effort, rating, instructions)
+
+    def recipe_name_check(self):
+        if Database_Files.recipe_already_exists(self.recipe_name.recipe_name_input.text()):
+            self.recipe_name.recipe_name_input.setStyleSheet("color: red;")
+        else:
+            self.recipe_name.recipe_name_input.setStyleSheet("color: black;")
 
 
 

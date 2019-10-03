@@ -1,4 +1,5 @@
 import sys
+import Database_Files
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class SearchRecipe(QtWidgets.QWidget):
@@ -90,12 +91,12 @@ class SearchRecipe(QtWidgets.QWidget):
 
         self.recipes = QtWidgets.QTableWidget(self)
         layout.addWidget(self.recipes)
+        self.load_all_recepies()
 
-    '''def load_all_recepies(self):
-        result = Database_Files.readall_recipes("Rezeptdatenbank.db")
-        print(result)
+    def load_all_recepies(self):
+        result = Database_Files.readall_recipes()
 
-    load_all_recepies'''
+
 
 if __name__ == "__main__":
     import Rezeptdatenbank

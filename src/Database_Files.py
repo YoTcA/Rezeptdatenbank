@@ -102,18 +102,22 @@ def add_ingredients(recipe_name, quantity, unit, ingredient):
 def recipe_already_exists(recipe_name):
     conn = None
     result = False
+    print(recipe_name)
     try:
         conn = sqlite3.connect("Rezeptdatenbank.db")
         cur = conn.cursor()
         sql = "SELECT recipe_name FROM recipes WHERE recipe_name=?"
-        result = cur.execute(sql, recipe_name)
+        result = cur.execute(sql, [recipe_name]).fetchone()
     except sqlite3.Error as e:
         print(e)
         return False
     else:
         if result:
+            print("recipe already exists")
+            print(result)
             return True
         else:
+            print("recipe name not used")
             return False
     finally:
         if conn:
