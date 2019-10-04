@@ -89,18 +89,39 @@ class SearchRecipe(QtWidgets.QWidget):
         self.effort_rating_area_layout.addWidget(self.rating_area)
         self.effort_rating_area_layout.addStretch(1)
 
+        # Table for displaying the found recipes
         self.recipes = QtWidgets.QTableWidget(self)
+
+        # Formating of the Table
         self.recipes.setColumnCount(6)
+        self.recipes.setHorizontalHeaderLabels(["Recipe Name", "Tags", "Duration", "Portions", "Effort", "Rating"])
+        header = self.recipes.horizontalHeader()
+        header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
+        self.recipes.verticalHeader().hide()
+        self.recipes.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+
         layout.addWidget(self.recipes)
         self.load_all_recepies()
 
     def load_all_recepies(self):
         result = Database_Files.readall_recipes()
         print(len(result))
-        self.recipes.setRowCount(len(result))
+        #self.recipes.setRowCount(len(result))
         for row in result:
-            #self.recipes.setItem(0,1, )
-            print(row)
+            row_number = self.recipes.rowCount()
+            self.recipes.insertRow(row_number)
+            for col_number, col in enumerate(row):
+                if col_number <= 1:
+                    item = QtWidgets.QTableWidgetItem(str(col))
+                    item.setTextAlignment(QtCore.Qt.AlignLeft)
+                else:
+                    item = QtWidgets.QTableWidgetItem(str(col))
+                    item.setTextAlignment(QtCore.Qt.AlignHCenter)
+                self.recipes.setItem(row_number, col_number, item)
+
+
+
 
 
 

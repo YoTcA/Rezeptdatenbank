@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8009c2c2-0d4c-418e-9861-48d096aa5fc3" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Database_Files.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Database_Files.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SearchRecipe.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/SearchRecipe.py" afterDir="false" />
     </list>
     <ignored path="Rezeptdatenbank.iws" />
@@ -31,8 +30,8 @@
           <file leaf-file-name="Rezeptdatenbank.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Rezeptdatenbank.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="483">
-                  <caret line="67" column="65" lean-forward="true" selection-start-line="67" selection-start-column="65" selection-end-line="67" selection-end-column="65" />
+                <state relative-caret-position="867">
+                  <caret line="51" column="46" lean-forward="true" selection-start-line="51" selection-start-column="46" selection-end-line="51" selection-end-column="46" />
                   <folding>
                     <element signature="e#0#10#0" expanded="true" />
                   </folding>
@@ -52,8 +51,8 @@
           <file leaf-file-name="NewRecipe.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/NewRecipe.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1088">
-                  <caret line="64" column="30" lean-forward="true" selection-start-line="64" selection-start-column="30" selection-end-line="64" selection-end-column="30" />
+                <state relative-caret-position="252">
+                  <caret line="198" column="52" selection-start-line="198" selection-start-column="32" selection-end-line="198" selection-end-column="52" />
                   <folding>
                     <element signature="e#0#42#0" expanded="true" />
                   </folding>
@@ -64,8 +63,8 @@
           <file leaf-file-name="SearchRecipe.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/SearchRecipe.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="547">
-                  <caret line="101" column="13" selection-start-line="101" selection-start-column="13" selection-end-line="101" selection-end-column="13" />
+                <state relative-caret-position="292">
+                  <caret line="98" column="41" selection-start-line="98" selection-start-column="41" selection-end-line="98" selection-end-column="41" />
                   <folding>
                     <element signature="e#0#10#0" expanded="true" />
                   </folding>
@@ -80,8 +79,8 @@
           <file leaf-file-name="Database_Files.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/Database_Files.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="357">
-                  <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
+                <state relative-caret-position="272">
+                  <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
                   <folding>
                     <element signature="e#0#14#0" expanded="true" />
                   </folding>
@@ -214,6 +213,7 @@
       <find>pack</find>
       <find>font</find>
       <find>searcharea</find>
+      <find>align</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -908,7 +908,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570103878333</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="pause">
+      <created>1570109534757</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1570109534757</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1003,6 +1010,16 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/test/pyQt-test/PyQtTest4.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="22" column="42" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Rezeptdatenbank_old.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -1128,9 +1145,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
           <caret line="32" column="24" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1228,10 +1242,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Database_Files.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Rezeptdatenbank.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="67" column="65" lean-forward="true" selection-start-line="67" selection-start-column="65" selection-end-line="67" selection-end-column="65" />
+        <state relative-caret-position="867">
+          <caret line="51" column="46" lean-forward="true" selection-start-line="51" selection-start-column="46" selection-end-line="51" selection-end-column="46" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
@@ -1245,33 +1269,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Rezeptdatenbank.db">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/NewRecipe.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1088">
-          <caret line="64" column="30" lean-forward="true" selection-start-line="64" selection-start-column="30" selection-end-line="64" selection-end-column="30" />
+        <state relative-caret-position="252">
+          <caret line="198" column="52" selection-start-line="198" selection-start-column="32" selection-end-line="198" selection-end-column="52" />
           <folding>
             <element signature="e#0#42#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Database_Files.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/SearchRecipe.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="547">
-          <caret line="101" column="13" selection-start-line="101" selection-start-column="13" selection-end-line="101" selection-end-column="13" />
+        <state relative-caret-position="292">
+          <caret line="98" column="41" selection-start-line="98" selection-start-column="41" selection-end-line="98" selection-end-column="41" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
